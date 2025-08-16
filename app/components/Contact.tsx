@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
           <div className="w-16 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">Let's collaborate and bring your ideas to life!</p>
+          <p className="text-lg text-gray-600">Let us collaborate and bring your ideas to life!</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -79,9 +79,9 @@ const Contact: React.FC = () => {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Let's Work Together</h3>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                I'm always interested in new opportunities and challenging projects. 
+                I am always interested in new opportunities and challenging projects. 
                 Whether you need a responsive website, a complex web application, or 
-                just want to discuss your ideas, I'd love to hear from you.
+                just want to discuss your ideas, I would love to hear from you.
               </p>
             </div>
             

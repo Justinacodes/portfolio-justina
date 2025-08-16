@@ -15,7 +15,7 @@ const About: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="prose prose-lg text-gray-600 mb-8">
               <p className="mb-6">
-                I'm a passionate front-end developer with a strong foundation in modern web technologies. 
+                A passionate front-end developer with a strong foundation in modern web technologies. 
                 My journey began with reading books on web development, which gave me a solid theoretical 
                 understanding of HTML. However, my real growth started in 2022 when I interned as a 
                 front-end developer at Revocube Technologies, where I gained hands-on experience and 
