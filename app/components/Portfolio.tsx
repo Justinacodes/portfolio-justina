@@ -21,7 +21,7 @@ const Portfolio: React.FC = () => {
       id: 1,
       title: "Ride-Sharing Platform",
       description: "Full-stack ride sharing application with user authentication, real-time messaging, google map integration and ride matching features",
-      category: "web-app" && "dashboard",
+      category: "dashboard",
       technologies: ["NextJs", "TypeScript", "TailwindCSS", "Appwrite"],
       image: "ride-placeholder",
       demoUrl: "https://ride-geng.vercel.app",
