@@ -24,7 +24,7 @@ const About: React.FC = () => {
               
               <p className="mb-6">
                 My experience spans across crafting interactive shopping carts, sophisticated dashboards, 
-                and robust search features, always with a focus on clean, modular code that's easy to 
+                and robust search features, always with a focus on clean, modular code that&apos;s easy to 
                 maintain and scale.
               </p>
             </div>

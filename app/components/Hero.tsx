@@ -30,6 +30,7 @@ const Hero: React.FC = () => {
           
           <div className="flex justify-center">
             <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 p-1 shadow-2xl">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={'/justy.jpeg'} 
                 alt='Justina Ominisan' 

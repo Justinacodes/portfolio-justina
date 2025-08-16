@@ -77,7 +77,7 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Let's Work Together</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Let&apos;s Work Together</h3>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 I am always interested in new opportunities and challenging projects. 
                 Whether you need a responsive website, a complex web application, or 
