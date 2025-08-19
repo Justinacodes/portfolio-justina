@@ -29,7 +29,7 @@ const Portfolio: React.FC = () => {
     },
     {
       id: 2,
-      title: "Interactive Shopping Cart",
+      title: "Tee-essentials",
       description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
       category: "ecommerce",
       technologies: ["React", "Redux", "Stripe API"],
@@ -51,7 +51,7 @@ const Portfolio: React.FC = () => {
       title: "Revocube Website",
       description: "Revocube Meida website was built from the ground up using CSS, JavaScript, HTML. It offers a unique combination of JavaScript toggle effects, CSS animations, Google fonts, Font Awesome icons and an image slider.",
       category: "website",
-      technologies: ["Next.js", "Tailwind CSS", "Framer Motion"],
+      technologies: ["HTML", "CSS", "JavaScript"],
       image: "revocube-placeholder",
       demoUrl: "https://revocube.vercel.app/",
       githubUrl: "https://github.com/Justinacodes"
@@ -67,8 +67,6 @@ const Portfolio: React.FC = () => {
       demoUrl: "https://movie-rev-psi.vercel.app",
       githubUrl: "https://github.com/Justinacodes"
     },
-
- 
     {
         id: 6,
         title: "Yield-up",
@@ -92,21 +90,20 @@ const Portfolio: React.FC = () => {
   const filteredProjects = activeFilter === 'all' 
     ? projects 
     : projects.filter(project => project.category === activeFilter);
-
+    
   const getPlaceholderContent = (image: string) => {
     const placeholderMap: { [key: string]: string } = {
-      'dashboard-placeholder': '📊 Dashboard',
-      'shopping-cart-placeholder': '🛒 Tee-essentials',
-      'shopping-placeholder': '🛒 Highklazz',
-      'task-app-placeholder': '✅ Mov-rev',
-      'revocube-placeholder': '💻  Revocube',
-      'finance-placeholder': '💰 Finance',
-      'ride-placeholder': ' 🚗 Ride-app',
-      'yield-placeholder': '🌱 Yield-up'
+      'dashboard-placeholder': '/images/dashboard.png',
+      'shopping-cart-placeholder': '/images/tee-essentials.png',
+      'shopping-placeholder': '/images/highklazz.png',
+      'task-app-placeholder': '/images/movrev.png',
+      'revocube-placeholder': '/images/revocube.png',
+      'ride-placeholder': '/images/ride-geng.png',
+      'yield-placeholder': '/images/yieldup.png'
     };
-    return placeholderMap[image] || '💻 Project';
+    return placeholderMap[image] || '/images/default-project.png';
   };
-
+    
   return (
     <section id="portfolio" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -143,11 +140,18 @@ const Portfolio: React.FC = () => {
               key={project.id}
               className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
-              {/* Project Image Placeholder */}
-              <div className="relative h-48 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center overflow-hidden">
-                <div className="text-4xl font-bold text-indigo-600 group-hover:scale-110 transition-transform duration-300">
-                  {getPlaceholderContent(project.image)}
-                </div>
+              {/* Project Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={getPlaceholderContent(project.image)}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMiA5VjEzTTEyIDE3SDE2TTE2IDlIMTJNMTYgMTNIMTJNMTYgMTdIMTJNOCA5SDEyTTggMTNIMTJNOCAxN0gxMiIgc3Ryb2tlPSIjOUI5Qjk2IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=';
+                  }}
+                />
                 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
