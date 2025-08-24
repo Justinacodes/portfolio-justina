@@ -1,5 +1,6 @@
 // app/components/Resume.tsx
 "use client"
+import { Briefcase, GraduationCap } from 'lucide-react';
 import React from 'react';
 
 interface ResumeItem {
@@ -12,10 +13,9 @@ interface ResumeItem {
   type: 'education' | 'experience';
 }
 
-interface Achievement {
-  number: string;
-  label: string;
-  icon: string;
+interface Skill {
+  name: string;
+  image: string;
 }
 
 const Resume: React.FC = () => {
@@ -44,9 +44,7 @@ const Resume: React.FC = () => {
         "Deepened my expertise in React, Next.js, TypeScript, and other cutting-edge technologies.",
       ],
       type: "experience"
-
     }, 
-
     {
       id: 3,
       title: "Backend Development Fellow",
@@ -75,15 +73,49 @@ const Resume: React.FC = () => {
       ],
       type: 'experience'
     },
-  
   ];
 
-
-
-  const skills = [
-    "React & Next.js", "TypeScript & JavaScript", "HTML5 & CSS3", 
-    "Node.js & Express.js", "MongoDB & SQL", "Git & Version Control",
-    "Responsive Design", "RESTful APIs", "Wordpress", "Agile Development"
+  const skills: Skill[] = [
+    {
+      name: "Next.js",
+      image: "/images/next.png"
+    },
+    {
+      name: "React",
+      image: "/images/atom.png"
+    },
+    {
+      name: "TypeScript",
+      image: "/images/typescript.png"
+    },
+    {
+      name: "JavaScript",
+      image: "/images/js.png"
+    },
+    {
+      name: "HTML5",
+      image: "/images/html.png"
+    },
+    {
+      name: "CSS",
+      image: "/images/css3.png"
+    },
+    {
+      name: "Express.js",
+      image: "/images/express.png"
+    },
+    {
+      name: "MongoDB",
+      image: "/images/mongodb.svg"
+    },
+    {
+      name: "Git & Version Control",
+      image: "/images/git.png"
+    },
+    {
+      name: "WordPress",
+      image: "/images/wordpress.png"
+    },
   ];
 
   return (
@@ -112,12 +144,43 @@ const Resume: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Education & Experience Timeline */}
           <div className="lg:col-span-2">
+            {/* Experience Section */}
+            <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                  <Briefcase />
+                  </div>
+                  Professional Experience
+                </h3>
+                {resumeData.filter((item: { type: string; }) => item.type === 'experience').map((item) => (
+                  <div key={item.id} className="bg-white p-6 rounded-xl shadow-lg mb-6 border-l-4 border-purple-600">
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h4>
+                        <h5 className="text-purple-600 font-medium mb-1">{item.organization}</h5>
+                        <p className="text-gray-500 text-sm">{item.location}</p>
+                      </div>
+                      <span className="inline-block px-3 py-1 bg-amber-100 text-amber-600 text-sm font-semibold rounded-full mt-2 md:mt-0">
+                        {item.period}
+                      </span>
+                    </div>
+                    <ul className="text-gray-600 space-y-1">
+                      {item.description.map((desc, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-purple-600 mr-2 mt-1">•</span>
+                          {desc}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             <div className="space-y-8">
               {/* Education Section */}
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                   <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
-                    🎓
+                    <GraduationCap />
                   </div>
                   Education
                 </h3>
@@ -144,42 +207,10 @@ const Resume: React.FC = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Experience Section */}
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                  <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
-                    💼
-                  </div>
-                  Professional Experience
-                </h3>
-                {resumeData.filter(item => item.type === 'experience').map((item) => (
-                  <div key={item.id} className="bg-white p-6 rounded-xl shadow-lg mb-6 border-l-4 border-purple-600">
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h4>
-                        <h5 className="text-purple-600 font-medium mb-1">{item.organization}</h5>
-                        <p className="text-gray-500 text-sm">{item.location}</p>
-                      </div>
-                      <span className="inline-block px-3 py-1 bg-amber-100 text-amber-600 text-sm font-semibold rounded-full mt-2 md:mt-0">
-                        {item.period}
-                      </span>
-                    </div>
-                    <ul className="text-gray-600 space-y-1">
-                      {item.description.map((desc, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-purple-600 mr-2 mt-1">•</span>
-                          {desc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
-          {/* Skills Sidebar */}
+          {/* Skills Sidebar with SVG Icons */}
           <div className="lg:col-span-1">
             <div className="bg-white p-8 rounded-xl shadow-lg sticky top-24">
               <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
@@ -193,10 +224,20 @@ const Resume: React.FC = () => {
                 {skills.map((skill, index) => (
                   <div 
                     key={index}
-                    className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-300"
+                    className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-300 group"
                   >
-                    <div className="w-2 h-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mr-3"></div>
-                    <span className="font-medium">{skill}</span>
+                    <div className="w-8 h-8 mr-3 flex-shrink-0">
+                      <img 
+                        src={skill.image} 
+                        alt={skill.name}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          // Fallback to a placeholder if image fails to load
+                          e.currentTarget.src = "/images/skills/default.png";
+                        }}
+                      />
+                    </div>
+                    <span className="font-medium">{skill.name}</span>
                   </div>
                 ))}
               </div>
