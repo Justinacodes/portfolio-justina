@@ -82,7 +82,7 @@ const Resume: React.FC = () => {
     },
     {
       name: "React",
-      image: "/images/atom.png"
+      image: "/images/react-icon.png"
     },
     {
       name: "TypeScript",
@@ -140,9 +140,53 @@ const Resume: React.FC = () => {
             Download CV
           </a>
         </div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Education & Experience Timeline */}
+          <div className="lg:col-span-1">
+            <div className="bg-white p-8 rounded-xl shadow-lg sticky top-24">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                  ⚡
+                </div>
+                Core Skills
+              </h3>
+              
+              <div className="space-y-3">
+                {skills.map((skill, index) => (
+                  <div 
+                    key={index}
+                    className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-300 group"
+                  >
+                    <div className="w-8 h-8 mr-3 flex-shrink-0">
+                      <img 
+                        src={skill.image} 
+                        alt={skill.name}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          // Fallback to a placeholder if image fails to load
+                          e.currentTarget.src = "/images/skills/default.png";
+                        }}
+                      />
+                    </div>
+                    <span className="font-medium">{skill.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Additional Info */}
+              <div className="mt-8 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg">
+                <h4 className="font-semibold text-gray-900 mb-2">Available For</h4>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Full-time positions</li>
+                  <li>• Freelance projects</li>
+                  <li>• Remote collaboration</li>
+                  <li>• Contract work</li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div className="lg:col-span-2">
             {/* Experience Section */}
             <div>
@@ -211,49 +255,7 @@ const Resume: React.FC = () => {
           </div>
 
           {/* Skills Sidebar with SVG Icons */}
-          <div className="lg:col-span-1">
-            <div className="bg-white p-8 rounded-xl shadow-lg sticky top-24">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
-                  ⚡
-                </div>
-                Core Skills
-              </h3>
-              
-              <div className="space-y-3">
-                {skills.map((skill, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-300 group"
-                  >
-                    <div className="w-8 h-8 mr-3 flex-shrink-0">
-                      <img 
-                        src={skill.image} 
-                        alt={skill.name}
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          // Fallback to a placeholder if image fails to load
-                          e.currentTarget.src = "/images/skills/default.png";
-                        }}
-                      />
-                    </div>
-                    <span className="font-medium">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Additional Info */}
-              <div className="mt-8 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-2">Available For</h4>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>• Full-time positions</li>
-                  <li>• Freelance projects</li>
-                  <li>• Remote collaboration</li>
-                  <li>• Contract work</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      
         </div>
       </div>
     </section>

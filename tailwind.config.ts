@@ -24,11 +24,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
+        'roboto': ['var(--font-roboto)', 'sans-serif'],
+      }
     },
   },
   plugins: [],
 }
 
-export default config;
+export default config
