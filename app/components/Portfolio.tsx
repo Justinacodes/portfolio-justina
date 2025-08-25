@@ -134,7 +134,7 @@ const Portfolio: React.FC = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
@@ -163,7 +163,7 @@ const Portfolio: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Live Demo
+                        Demo
                       </a>
                     )}
                     {project.githubUrl && (
@@ -207,11 +207,11 @@ const Portfolio: React.FC = () => {
         </div>
 
         {/* Load More Button (optional) */}
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <button className="px-8 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-all duration-300">
             View More Projects
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
