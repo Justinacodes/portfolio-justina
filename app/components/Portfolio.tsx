@@ -19,22 +19,22 @@ const Portfolio: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Ride-Sharing Platform",
-      description: "Full-stack ride sharing application with user authentication, real-time messaging, google map integration and ride matching features",
-      category: "dashboard",
-      technologies: ["NextJs", "TypeScript", "TailwindCSS", "Appwrite"],
-      image: "ride-placeholder",
-      demoUrl: "https://ride-geng.vercel.app",
-      githubUrl: "https://github.com/Justinacodes"
-    },
-    {
-      id: 2,
       title: "AI Job Tracker",
       description: "Your intelligent assistant for the job hunt. Track applications, analyze resumes, generate cover letters, and prepare for interviews—all in one place.",
       category: "dashboard",
       technologies: ["NextJS", "Typescript", "TailwindCss", "Appwrite"],
       image: "jobtracker-placeholder",
       demoUrl: "https://jobtrackerappnu.vercel.app",
+      githubUrl: "https://github.com/Justinacodes"
+    },
+    {
+      id: 2,
+      title: "Ride-Sharing Platform",
+      description: "Full-stack ride sharing application with user authentication, real-time messaging, google map integration and ride matching features",
+      category: "dashboard",
+      technologies: ["NextJs", "TypeScript", "TailwindCSS", "Appwrite"],
+      image: "ride-placeholder",
+      demoUrl: "https://ride-geng.vercel.app",
       githubUrl: "https://github.com/Justinacodes"
     },
     {
@@ -113,8 +113,8 @@ const Portfolio: React.FC = () => {
 
   const getPlaceholderContent = (image: string) => {
     const placeholderMap: { [key: string]: string } = {
-      'dashboard-placeholder': '/images/dashboard.png',
       'jobtracker-placeholder': '/images/jobtracker.png',
+      'dashboard-placeholder': '/images/dashboard.png',
       'shopping-cart-placeholder': '/images/tee-essentials.png',
       'shopping-placeholder': '/images/highklazz.png',
       'emmaplus-placeholder': '/images/emmaplus.png',
@@ -145,8 +145,8 @@ const Portfolio: React.FC = () => {
               key={category.key}
               onClick={() => setActiveFilter(category.key)}
               className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${activeFilter === category.key
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
             >
               {category.label}
