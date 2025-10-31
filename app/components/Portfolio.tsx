@@ -29,6 +29,16 @@ const Portfolio: React.FC = () => {
     },
     {
       id: 2,
+      title: "AI Job Tracker",
+      description: "Your intelligent assistant for the job hunt. Track applications, analyze resumes, generate cover letters, and prepare for interviews—all in one place.",
+      category: "dashboard",
+      technologies: ["NextJS", "Typescript", "TailwindCss", "Appwrite"],
+      image: "jobtracker-placeholder",
+      demoUrl: "https://jobtrackerappnu.vercel.app",
+      githubUrl: "https://github.com/Justinacodes"
+    },
+    {
+      id: 3,
       title: "Tee-essentials",
       description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
       category: "ecommerce",
@@ -38,16 +48,26 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 3,
+      id: 4,
       title: "Highklazz",
       description: "Highklazz is an e-commerce store where users can get all of their male clothing and accessory needs attended to. Features: Cart and checkout functionality, payment integration, live chat, login/sign-up authentication.",
       category: "ecommerce",
-      technologies: ["WordPress", "Elementor"],
+      technologies: ["WordPress", "Elementor", "Paystack API"],
       image: "shopping-placeholder",
       demoUrl: "https://highklazz.com.ng",
     },
     {
-      id: 4,
+      id: 5,
+      title: "Emmaplus",
+      description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
+      category: "ecommerce",
+      technologies: ["Wordpress", "Woocommerce", "Elementor", "Paystack API"],
+      image: "emmaplus-placeholder",
+      demoUrl: "https://emmaplus.com.ng",
+      githubUrl: "https://github.com/Justinacodes"
+    },
+    {
+      id: 6,
       title: "Revocube Website",
       description: "Revocube Meida website was built from the ground up using CSS, JavaScript, HTML. It offers a unique combination of JavaScript toggle effects, CSS animations, Google fonts, Font Awesome icons and an image slider.",
       category: "website",
@@ -56,9 +76,9 @@ const Portfolio: React.FC = () => {
       demoUrl: "https://revocube.vercel.app/",
       githubUrl: "https://github.com/Justinacodes"
     },
-   
+
     {
-      id: 5,
+      id: 7,
       title: "Movie App",
       description: "Built using React, JavaScript and CSS, Mov-Rev is an app where users can check out movie reviews and ratings of latest movies.",
       category: "web-app",
@@ -68,15 +88,15 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-        id: 6,
-        title: "Yield-up",
-        description: "A lightweight, interactive agricultural tool for quick soil and crop assessment.",
-        category: "website",
-        technologies: ["NextJs", "TypeScript", "TailwindCSS"],
-        image: "yield-placeholder",
-        demoUrl: "https://yieldup.vercel.app",
-        githubUrl: "https://github.com/Justinacodes"
-      }
+      id: 8,
+      title: "Yield-up",
+      description: "A lightweight, interactive agricultural tool for quick soil and crop assessment.",
+      category: "website",
+      technologies: ["NextJs", "TypeScript", "TailwindCSS"],
+      image: "yield-placeholder",
+      demoUrl: "https://yieldup.vercel.app",
+      githubUrl: "https://github.com/Justinacodes"
+    }
   ];
 
   const categories = [
@@ -87,15 +107,17 @@ const Portfolio: React.FC = () => {
     { key: 'website', label: 'Websites' },
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
+  const filteredProjects = activeFilter === 'all'
+    ? projects
     : projects.filter(project => project.category === activeFilter);
-    
+
   const getPlaceholderContent = (image: string) => {
     const placeholderMap: { [key: string]: string } = {
       'dashboard-placeholder': '/images/dashboard.png',
+      'jobtracker-placeholder': '/images/jobtracker.png',
       'shopping-cart-placeholder': '/images/tee-essentials.png',
       'shopping-placeholder': '/images/highklazz.png',
+      'emmaplus-placeholder': '/images/emmaplus.png',
       'task-app-placeholder': '/images/movrev.png',
       'revocube-placeholder': '/images/revocube.png',
       'ride-placeholder': '/images/ride-geng.png',
@@ -103,7 +125,7 @@ const Portfolio: React.FC = () => {
     };
     return placeholderMap[image] || '/images/default-project.png';
   };
-    
+
   return (
     <section id="portfolio" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,7 +133,7 @@ const Portfolio: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">My Works</h2>
           <div className="w-16 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Here are some of my recent projects that showcase my skills in front-end development, 
+            Here are some of my recent projects that showcase my skills in front-end development,
             from interactive dashboards to comprehensive e-commerce solutions.
           </p>
         </div>
@@ -122,11 +144,10 @@ const Portfolio: React.FC = () => {
             <button
               key={category.key}
               onClick={() => setActiveFilter(category.key)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                activeFilter === category.key
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${activeFilter === category.key
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+                }`}
             >
               {category.label}
             </button>
@@ -152,7 +173,7 @@ const Portfolio: React.FC = () => {
                     target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMiA5VjEzTTEyIDE3SDE2TTE2IDlIMTJNMTYgMTNIMTJNMTYgMTdIMTJNOCA5SDEyTTggMTNIMTJNOCAxN0gxMiIgc3Ryb2tlPSIjOUI5Qjk2IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=';
                   }}
                 />
-                
+
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 flex gap-3">
@@ -185,7 +206,7 @@ const Portfolio: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
                   {project.title}
                 </h3>
-                
+
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   {project.description}
                 </p>
