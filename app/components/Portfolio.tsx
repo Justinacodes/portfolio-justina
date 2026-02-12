@@ -6,7 +6,7 @@ interface Project {
   id: number;
   title: string;
   description: string;
-  category: string;
+  categories: string[];
   technologies: string[];
   image: string;
   demoUrl?: string;
@@ -21,7 +21,7 @@ const Portfolio: React.FC = () => {
       id: 1,
       title: "Allwecure",
       description: "Allwecure bridges the gap between licensed healthcare providers and verified pharmaceutical suppliers. We provide a transparent, secure procurement network for Pharmacies, Patent Stores, and Hospitals",
-      category: "dashboard",
+      categories: ["dashboard", "web-app"],
       technologies: ["NextJS", "Typescript", "TailwindCss"],
       image: "allwecure-placeholder",
       demoUrl: "https://allwecure.com",
@@ -31,7 +31,7 @@ const Portfolio: React.FC = () => {
       id: 2,
       title: "AI Job Tracker",
       description: "Your intelligent assistant for the job hunt. Track applications, analyze resumes, generate cover letters, and prepare for interviews—all in one place.",
-      category: "dashboard",
+      categories: ["dashboard", "web-app"],
       technologies: ["NextJS", "Typescript", "TailwindCss", "Appwrite"],
       image: "jobtracker-placeholder",
       demoUrl: "https://jobtrackerappnu.vercel.app",
@@ -41,7 +41,7 @@ const Portfolio: React.FC = () => {
       id: 3,
       title: "Ride-Sharing Platform",
       description: "Full-stack ride sharing application with user authentication, real-time messaging, google map integration and ride matching features",
-      category: "dashboard",
+      categories: ["dashboard", "web-app"],
       technologies: ["NextJs", "TypeScript", "TailwindCSS", "Appwrite"],
       image: "ride-placeholder",
       demoUrl: "https://ride-geng.vercel.app",
@@ -51,7 +51,7 @@ const Portfolio: React.FC = () => {
       id: 4,
       title: "Tee-essentials",
       description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
-      category: "ecommerce",
+      categories: ["ecommerce", "web-app"],
       technologies: ["React", "Redux", "Stripe API"],
       image: "shopping-cart-placeholder",
       demoUrl: "https://tee-essentials.vercel.app",
@@ -61,7 +61,7 @@ const Portfolio: React.FC = () => {
       id: 5,
       title: "Highklazz",
       description: "Highklazz is an e-commerce store where users can get all of their male clothing and accessory needs attended to. Features: Cart and checkout functionality, payment integration, live chat, login/sign-up authentication.",
-      category: "ecommerce",
+      categories: ["ecommerce", "web-app"],
       technologies: ["WordPress", "Elementor", "Paystack API"],
       image: "shopping-placeholder",
       demoUrl: "https://highklazz.com.ng",
@@ -70,7 +70,7 @@ const Portfolio: React.FC = () => {
       id: 6,
       title: "Emmaplus",
       description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
-      category: "ecommerce",
+      categories: ["ecommerce", "web-app"],
       technologies: ["Wordpress", "Woocommerce", "Elementor", "Paystack API"],
       image: "emmaplus-placeholder",
       demoUrl: "https://emmaplus.com.ng",
@@ -80,18 +80,17 @@ const Portfolio: React.FC = () => {
       id: 7,
       title: "Revocube Website",
       description: "Revocube Meida website was built from the ground up using CSS, JavaScript, HTML. It offers a unique combination of JavaScript toggle effects, CSS animations, Google fonts, Font Awesome icons and an image slider.",
-      category: "website",
+      categories: ["website"],
       technologies: ["HTML", "CSS", "JavaScript"],
       image: "revocube-placeholder",
       demoUrl: "https://revocube.vercel.app/",
       githubUrl: "https://github.com/Justinacodes"
     },
-
     {
       id: 8,
       title: "Movie App",
       description: "Built using React, JavaScript and CSS, Mov-Rev is an app where users can check out movie reviews and ratings of latest movies.",
-      category: "web-app",
+      categories: ["web-app"],
       technologies: ["React", "Javascript", "CSS"],
       image: "task-app-placeholder",
       demoUrl: "https://movie-rev-psi.vercel.app",
@@ -101,7 +100,7 @@ const Portfolio: React.FC = () => {
       id: 9,
       title: "Yield-up",
       description: "A lightweight, interactive agricultural tool for quick soil and crop assessment.",
-      category: "website",
+      categories: ["website"],
       technologies: ["NextJs", "TypeScript", "TailwindCSS"],
       image: "yield-placeholder",
       demoUrl: "https://yieldup.vercel.app",
@@ -119,7 +118,7 @@ const Portfolio: React.FC = () => {
 
   const filteredProjects = activeFilter === 'all'
     ? projects
-    : projects.filter(project => project.category === activeFilter);
+    : projects.filter(project => project.categories.includes(activeFilter));
 
   const getPlaceholderContent = (image: string) => {
     const placeholderMap: { [key: string]: string } = {
