@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
+import { ReactNode } from 'react'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
 
@@ -8,7 +9,6 @@ const roboto = Roboto({
   subsets: ['latin'],
   variable: '--font-roboto',
 })
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.justinaominisan.com.ng"),
@@ -54,12 +54,35 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Justina Ominisan",
+    url: "https://www.justinaominisan.com.ng",
+    jobTitle: "Front-End Developer",
+    sameAs: [
+      "https://github.com/Justinacodes",
+      "https://www.linkedin.com/in/justina-ominisan-1b5a72246"
+    ]
+  }
+
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
-      <Analytics />
+      <body className={roboto.className}>
+        {children}
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+
+        <Analytics />
+      </body>
     </html>
   )
 }
