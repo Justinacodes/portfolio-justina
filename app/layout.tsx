@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   description:
     "Front-end developer dedicated to creating intuitive, user-centered web experiences.",
 
+  verification: {
+    google: "PyTHVuWdONV5Wab8KSgC7_Jom6EBI2Z9GFuMjeaekr8",
+  },
+
   alternates: {
     canonical: "/",
   },
