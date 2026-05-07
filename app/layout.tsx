@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
+import { ReactNode } from 'react'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
 
@@ -9,19 +10,76 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
-
 export const metadata: Metadata = {
-  title: 'Justina Ominisan - Front-End Developer',
-  description: 'Front-end developer dedicated to creating intuitive, user-centered web experiences',
+  metadataBase: new URL("https://www.justinaominisan.com.ng"),
+
+  title: "Justina Ominisan - Front-End Developer",
+
+  description:
+    "Front-end developer dedicated to creating intuitive, user-centered web experiences.",
+
+  verification: {
+    google: "PyTHVuWdONV5Wab8KSgC7_Jom6EBI2Z9GFuMjeaekr8",
+  },
+
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    title: "Justina Ominisan - Front-End Developer",
+    description:
+      "Front-end developer dedicated to creating intuitive, user-centered web experiences.",
+    url: "https://www.justinaominisan.com.ng",
+    siteName: "Justina Ominisan Portfolio",
+    locale: "en_GB",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Justina Ominisan - Front-End Developer",
+    description:
+      "Front-end developer dedicated to creating intuitive, user-centered web experiences.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+}
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Justina Ominisan",
+  url: "https://www.justinaominisan.com.ng",
+  jobTitle: "Front-End Developer",
+  sameAs: [
+    "https://github.com/Justinacodes",
+    "https://www.linkedin.com/in/justina-ominisan-1b5a72246",
+  ],
 }
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className={roboto.className}>
         {children}
         <Analytics />
