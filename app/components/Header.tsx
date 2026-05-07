@@ -20,6 +20,7 @@ const Header: React.FC = () => {
               <li><a href="#resume" className="block py-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300">Resume</a></li>
               <li><a href="#portfolio" className="block py-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300">Portfolio</a></li>
               <li><a href="#contact" className="block py-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300">Contact</a></li>
+              <li><a href="/blog" className="block py-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300">Blog</a></li>
             </ul>
           </nav>
           
