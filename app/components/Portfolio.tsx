@@ -21,14 +21,24 @@ const Portfolio: React.FC = () => {
       id: 1,
       title: "Allwecure",
       description: "Allwecure bridges the gap between licensed healthcare providers and verified pharmaceutical suppliers. We provide a transparent, secure procurement network for Pharmacies, Patent Stores, and Hospitals",
-      categories: ["dashboard", "web-app"],
+      categories: ["dashboard", "web-app", "ecommerce"],
       technologies: ["NextJS", "Typescript", "TailwindCss"],
       image: "allwecure-placeholder",
       demoUrl: "https://allwecure.com",
       githubUrl: "https://github.com/Justinacodes"
     },
-    {
+       {
       id: 2,
+      title: "Stuvo",
+      description: "Pass exams with fun. Gamified study modes to help you learn smarter, compete with friends, and crush your exams",
+      categories: ["website"],
+      technologies: ["NextJS", "Typescript", "TailwindCss"],
+      image: "stuvo",
+      demoUrl: "https://stuvo-staging.jetprepapp.com/",
+      githubUrl: "https://github.com/Justinacodes"
+    },
+    {
+      id: 3,
       title: "AI Job Tracker",
       description: "Your intelligent assistant for the job hunt. Track applications, analyze resumes, generate cover letters, and prepare for interviews—all in one place.",
       categories: ["dashboard", "web-app"],
@@ -38,7 +48,7 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 3,
+      id: 4,
       title: "Ride-Sharing Platform",
       description: "Full-stack ride sharing application with user authentication, real-time messaging, google map integration and ride matching features",
       categories: ["dashboard", "web-app"],
@@ -48,7 +58,7 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 4,
+      id: 5,
       title: "Tee-essentials",
       description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
       categories: ["ecommerce", "web-app"],
@@ -58,7 +68,7 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 5,
+      id: 6,
       title: "Highklazz",
       description: "Highklazz is an e-commerce store where users can get all of their male clothing and accessory needs attended to. Features: Cart and checkout functionality, payment integration, live chat, login/sign-up authentication.",
       categories: ["ecommerce", "web-app"],
@@ -67,7 +77,7 @@ const Portfolio: React.FC = () => {
       demoUrl: "https://highklazz.com.ng",
     },
     {
-      id: 6,
+      id: 7,
       title: "Emmaplus",
       description: "Dynamic shopping cart with advanced filtering, wishlist functionality, and seamless checkout experience.",
       categories: ["ecommerce", "web-app"],
@@ -77,7 +87,7 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 7,
+      id: 8,
       title: "Revocube Website",
       description: "Revocube Meida website was built from the ground up using CSS, JavaScript, HTML. It offers a unique combination of JavaScript toggle effects, CSS animations, Google fonts, Font Awesome icons and an image slider.",
       categories: ["website"],
@@ -87,7 +97,7 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 8,
+      id: 9,
       title: "Movie App",
       description: "Built using React, JavaScript and CSS, Mov-Rev is an app where users can check out movie reviews and ratings of latest movies.",
       categories: ["web-app"],
@@ -97,7 +107,7 @@ const Portfolio: React.FC = () => {
       githubUrl: "https://github.com/Justinacodes"
     },
     {
-      id: 9,
+      id: 10,
       title: "Yield-up",
       description: "A lightweight, interactive agricultural tool for quick soil and crop assessment.",
       categories: ["website"],
@@ -123,6 +133,7 @@ const Portfolio: React.FC = () => {
   const getPlaceholderContent = (image: string) => {
     const placeholderMap: { [key: string]: string } = {
       'allwecure-placeholder': '/images/allwecure.png',
+      'stuvo': '/images/stuvo.png',
       'jobtracker-placeholder': '/images/jobtracker.png',
       'dashboard-placeholder': '/images/dashboard.png',
       'shopping-cart-placeholder': '/images/tee-essentials.png',
