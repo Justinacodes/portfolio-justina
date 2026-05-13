@@ -1,0 +1,18 @@
+
+SKILLS AND EXPERTISE
+
+Frontend Technologies:
+Proficient in a wide array of frontend technologies including React.js and Next.js for building dynamic and server-rendered applications. Strong command of TypeScript for type-safe code, and extensive experience with JavaScript (ES6+) for interactive web development. Expert in structuring web content with HTML5, styling with CSS3, and utilizing preprocessors like Sass. Skilled in modern CSS frameworks such as Tailwind CSS for rapid UI development, and Framer Motion for advanced animations and interactive components.
+
+Backend Technologies:
+Solid understanding and practical experience with Node.js for server-side development and Express.js for building robust web APIs. Capable of designing and implementing RESTful APIs for seamless data communication and managing databases, particularly MongoDB, for efficient data storage and retrieval.
+
+Development Tools and Methodologies:
+Experienced with version control systems like Git and platforms such as GitHub for collaborative development and code management. Familiar with Agile/Scrum methodologies for iterative development and continuous delivery. Proficient in setting up and managing Continuous Integration/Continuous Deployment (CI/CD) pipelines. Also skilled in WordPress for content management and custom theme/plugin development.
+
+Core Strengths:
+Demonstrated expertise in Responsive Design, ensuring applications are fully functional and visually appealing across all devices. Strong capabilities in SEO Optimisation to improve search engine rankings and organic traffic. Proven ability in Performance Tuning to achieve faster load times and smoother user experiences. Solid foundation in UI/UX Design principles, focusing on intuitive and engaging user interfaces. Adept at Debugging complex issues and ensuring Cross-browser Compatibility for a consistent user experience.
+
+Soft Skills:
+Excellent Communication skills, facilitating clear and effective interaction with team members and stakeholders. Strong Team Collaboration abilities, contributing positively to group projects and fostering a productive environment. Highly skilled in Problem Solving, approaching challenges with a logical and analytical mindset. Effective Time Management to meet deadlines and prioritize tasks efficiently. Adaptability to new technologies and changing project requirements. Meticulous Attention to Detail, ensuring high-quality and error-free work.
+Extract CV Details into Specific Text Files - Manus

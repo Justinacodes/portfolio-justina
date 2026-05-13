@@ -6,6 +6,7 @@ import Resume from './components/Resume'
 import Portfolio from './components/Portfolio'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ChatBot from './components/ChatBot'
 
 const Home: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
       <Portfolio />
       <Contact />
       <Footer />
+      <ChatBot />
     </div>
   )
 }

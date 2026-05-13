@@ -1,0 +1,420 @@
+Allwecure 
+1. Executive Summary and Introduction
+Allwecure is a robust B2B/B2C pharmaceutical and medical supply marketplace platform 
+designed to streamline the procurement process for medical products. The platform 
+connects pharmaceutical sellers with a diverse range of buyers, including pharmacies, 
+hospitals, patent medicine vendors, and regular consumers.
+This documentation provides a comprehensive overview of the entire Allwecure ecosystem, 
+which is composed of three primary components: a modern Web Frontend, a dedicated 
+Mobile Application, and a centralized Backend API with an Admin Panel.
+2. System Architecture Overview
+The Allwecure system follows a micro-frontend/monorepo-like structure, with distinct 
+applications communicating with a centralized, high-performance backend API.
+Component
+Web Frontend
+Mobile Application
+Backend API
+Technology Stack
+Next.js 16 (App Router), 
+TypeScript, TailwindCSS
+React Native, Expo (SDK 54), 
+Expo Router
+Purpose
+NestJS (Node.js), PostgreSQL, 
+Redis
+Admin Panel
+React (Next.js)
+Primary B2B/B2C 
+marketplace interface for 
+Buyers, Sellers, and Business 
+Developers.
+Dedicated mobile application 
+for buyers, focusing on 
+secure, on-the-go purchasing 
+and regulatory compliance.
+Centralized RESTful API for all 
+business logic, data 
+persistence, authentication, 
+and system administration.
+Control center for Super 
+Admins to manage users, 
+orders, and products.
+2.1. Core Technology Stack
+The platform leverages a contemporary and scalable technology stack:
+Component
+Backend Framework
+Database
+Caching
+Frontend Framework (Web)
+Frontend Framework 
+(Mobile)
+Language
+Technology
+NestJS (Node.js)
+PostgreSQL
+Redis
+Description
+Provides a robust, scalable, 
+and maintainable server-side 
+application structure.
+Primary relational data store 
+for transactions, inventory, 
+and user data.
+Used for in-memory caching 
+to improve API response 
+times and reduce database 
+load.
+Next.js 16.0.10 (App Router)
+React Native / Expo
+TypeScript
+Styling
+2.2. Third-Party Services
+Service
+Cloudinary
+TailwindCSS 4
+Purpose
+Full-stack React framework 
+enabling server-side 
+rendering and Server Actions 
+for performance.
+Cross-platform mobile 
+development for iOS and 
+Android.
+Ensures type safety and 
+improves code quality across 
+all components.
+Utility-first CSS framework for 
+rapid and consistent UI 
+development.
+File storage and optimization for product 
+images and other assets.
+Resend SMTP
+Transactional email service for notifications, 
+OTPs, and password resets.
+3. User Roles and Access Control
+Allwecure supports three distinct user roles on the marketplace, plus a dedicated Super 
+Admin role for system management.
+Role
+Buyer
+Seller
+Business Developer (BD)
+Super Admin
+Access Level
+Regular, Patent, Pharmacy
+Marketplace Vendor
+Key Functionalities
+Browse and purchase 
+products, manage cart, track 
+orders, view invoices, and 
+submit KYC for tier upgrades.
+Manage product inventory 
+(CRUD, bulk import), process 
+orders, access sales insights, 
+and manage drafts.
+Referral Agent
+Full System Access
+3.1. Regulatory Compliance and Buyer Tiers
+Refer new buyers, track 
+referral performance, and 
+view commission earnings.
+User management 
+(Buyers/Sellers), order 
+tracking, and 
+content/product oversight via 
+the Admin Panel.
+The platform implements a tiered access system to ensure regulatory compliance for 
+pharmaceutical sales, particularly within the mobile application:
+Tier/Access Level
+OTC (Over-The-Counter)
+Rx (Patent Only)
+Description
+Available to all users.
+Restricted To
+All Users
+Restricted products requiring 
+a specific license.
+Highly restricted products.
+Verified Patent Medicine 
+Vendors
+Verified Pharmacists
+Rx+ (Prescription Only)
+KYC verification is mandatory for buyers seeking to upgrade their tier access.
+4. Web Frontend (Next.js) Documentation
+4.1. Technology and Structure
+The web frontend is built with Next.js 16 (App Router) and TypeScript.
+Project Structure Highlights (
+ugatee/ ):
+Directory
+app/
+components/
+lib/
+context/
+Description
+Next.js App Router pages, including Server 
+Actions (
+actions/ ) and all dashboards.
+Reusable React components, categorized by 
+user role (
+buyer/ , 
+seller/ ) and feature.
+Core utilities, API layer (
+(ho
+api/ ), custom hooks 
+oks/ ), type definitions (
+types.ts ), and 
+session management.
+React Context providers for global state 
+management.
+4.2. Key Features
+Buyer Dashboard Features
+Feature
+Product Catalog
+Shopping Cart & Checkout
+Order Tracking
+Description
+Browsing with filters, search, and truncated 
+pagination (e.g., 
+1 ... 9 [10] 11 ... 20 ).
+Standard e-commerce flow for item 
+management and order placement.
+Visibility into the order lifecycle: 
+PENDING → 
+PROCESSING → 
+SHIPPED/DELIVERED .
+KYC Verification
+Supports document uploads for buyer tier 
+upgrades.
+Seller Dashboard Features
+Feature
+Overview
+Inventory Management
+Draft Management
+Order Management
+Description
+Displays key metrics (revenue, active orders, 
+low stock alerts).
+CRUD operations for products, including bulk 
+import via CSV.
+Imported products are initially saved as drafts 
+(
+isPublished: false ) and require manual 
+review/publishing.
+Viewing orders, updating status, and printing 
+packing slips.
+Insights
+Access to sales analytics and reports.
+4.3. API Layer Architecture (Web Frontend Perspective)
+The frontend interacts with the backend via a structured API layer (
+lib/api/ ).
+API Module
+core.ts
+auth.ts
+buyer.ts
+seller.ts
+Description
+Configures the base Axios client, handles 
+request/response interceptors, error handling, 
+and data transformation (e.g., 
+transformProduct ).
+Handles login, registration, password reset, 
+and OTP verification for all user types.
+Buyer-specific operations (order management, 
+product catalog, KYC uploads, cart 
+synchronization).
+Seller-specific operations (inventory CRUD, 
+bulk operations, order status updates, sales 
+statistics).
+4.4. Session Management
+Sessions are managed securely using HttpOnly cookies on the server-side. A token is 
+passed via the 
+Authorization header for API calls. Server Actions are used to handle 
+authenticated requests, while client components use custom hooks for data fetching.
+5. Mobile Application Documentation
+The mobile application is built with React Native and Expo, focusing on the buyer 
+experience and strict regulatory compliance.
+5.1. Technology Stack
+Component
+Framework
+Platform
+Navigation
+State Management
+Technology
+React Native
+Expo (SDK 54)
+Expo Router (v6) - File-based routing
+React Context API (
+AuthContext , 
+Storage
+5.2. Key Mobile Features
+AsyncStorage & 
+Expo Secure Store
+The mobile app mirrors the core buyer functionalities of the web platform:
+cartContext )
+• 
+Marketplace: Product catalog, smart search, filtering (Sales, Popularity, Brand), and 
+detailed product views.
+• 
+User Management: Secure authentication (Login, Registration, Password Recovery), 
+OTP verification, and profile management.
+• 
+Regulatory Compliance: Implementation of the tiered access system (OTC, Rx, Rx+) 
+and a dedicated screen for KYC Verification document submission.
+6. Backend API and Admin Panel Documentation
+6.1. Backend Technology and Infrastructure
+The backend is the single source of truth for all data and business logic.
+Component
+Technology
+Backend Framework
+Database
+Caching
+Infrastructure
+6.2. Data Structures
+NestJS (Node.js)
+PostgreSQL
+Redis (Currently configured for in-memory 
+caching)
+Self-hosted VPS managed via Dokploy
+Key data structures are defined in TypeScript, ensuring consistency across the system.
+Product Interface
+TypeScript
+interface Product {
+id: string | number;
+name: string;
+category: string;
+price: number;
+originalPrice?: number;
+stockCount?: number;
+minStock?: number;
+accessLevel?: "PRESCRIPTION_ONLY" | "OTC" | string;
+isPublished?: boolean;
+images?: string[];
+sku?: string;
+brand?: string;
+expiry_date?: string;
+// ... more fields
+}
+Order Status Flow
+The order lifecycle is strictly managed:
+Status
+PENDING
+Color (Frontend)
+Blue
+Description
+Order placed, awaiting 
+processing.
+PROCESSING
+SHIPPED/DELIVERED
+CANCELLED
+6.3. Admin Panel
+Yellow
+Green
+Red
+Order is being prepared for 
+shipment.
+Order has been shipped or 
+successfully delivered.
+Order has been cancelled.
+The Admin Panel is the control center for the system, accessible only to the Super Admin 
+role.
+Key Capabilities:
+1. User Management: View detailed lists and statuses of Buyers and Sellers.
+2. Order Management: Track active orders, view item breakdowns, and monitor status 
+changes.
+3. Content & Product Management: Oversee all products listed by sellers.
+6.4. Environment Configuration and Deployment
+Environment Variables (Backend)
+The backend requires a 
+Variable Category
+Database
+File Storage
+Authentication
+Email Service
+
+
+Secret keys for JWT token 
+signing.
+API key for Resend SMTP 
+service.
+Used for seeding the initial 
+Super Admin credential.
+Deployment
+The project is hosted on a managed VPS using Dokploy. Deployment relies on a connection 
+between the GitHub Organisation (containing the 
+admin , 
+frontend , and 
+backend 
+repositories) and the Dokploy deployment server, secured via a configured GitHub App.
+7. Development Setup and Running the Project
+7.1. Web Frontend (Next.js)
+Command
+npm install
+npm run dev
+npm run build
+npm start
+Description
+Install dependencies.
+Run the project in development mode.
+Create a production build.
+Start the production server.
+npm run type-check
+7.2. Backend API (NestJS)
+Run TypeScript type checking.
+Prerequisites: Node.js (v18+), PostgreSQL, and npm/yarn.
+1. Clone the Repository: 
+git clone <repo_url>
+2. Install Dependencies: 
+npm install
+3. Database Setup:
+• 
+Ensure PostgreSQL is running.
+• 
+Generate Prisma client: 
+npx prisma generate
+• 
+Sync schema: 
+npx prisma db push
+1. Run the Server:
+• 
+Development mode: 
+npm run start:dev
+• 
+Production mode: 
+npm run build then 
+npm run start:prod
+7.3. Mobile Application (React Native/Expo)
+
+8. Key Implementation Notes
+8.1. Order ID and Pricing
+
+• 
+Price Mapping:
+• 
+Unit Price (
+price ): Final selling price (what buyer pays) = originalPrice - discount
+• 
+Original Price (
+originalPrice ): Base price before any discount (shown crossed out).
+• 
+Discount: Amount subtracted from originalPrice
+• 
+Cost Price: Seller's internal cost, not displayed to buyers.
+8.2. Bulk Import Workflow
+The bulk import process is designed to ensure data quality and seller review:
+1. Seller uploads a CSV file.
+2. Products are parsed and a preview is displayed.
+3. All imported products are saved as drafts (
+isPublished: false ).
+4. The seller must manually review and publish each product via the Seller Dashboard.
+References
+[1] Allwecure(AllwecureMarketplace)-ProjectDocumentation(1).docx - Source 
+documentation provided by the user.
+
+
+Ride-Sharing Platform
+Developed a full-stack ride-sharing application that incorporated real-time messaging and advanced ride-matching functionalities. The platform integrated the Google Maps API for precise location tracking and implemented a robust, secure authentication system to protect user data and ensure safe transactions.
+
+AI Job Tracker
+An AI-powered application developed using Next.js, TypeScript, and Appwrite. This innovative tool provided features for efficient job tracking, in-depth resume analysis, and automated cover letter generation. The design prioritized intuitive dashboards to significantly improve user productivity in their job search efforts.
+
+Tee-Essentials
+Built a sophisticated e-commerce platform using React and Redux. The platform included essential e-commerce features such as a shopping cart, wishlist functionality, and advanced product filtering options. Payment processing was seamlessly integrated through Stripe, providing a secure and efficient checkout experience for customers.

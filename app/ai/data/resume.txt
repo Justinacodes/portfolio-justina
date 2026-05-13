@@ -1,0 +1,21 @@
+
+JUSTINA OMINISAN
+Remote Front-end Developer
+
+Contact Information:
+Phone: +234 705 863 5593
+Email: justinaominisan@gmail.com
+Website: justinaominisan.com.ng
+GitHub: github.com/justinacodes
+
+PROFESSIONAL SUMMARY
+Justina Ominisan is a results-driven Front-end Developer with over three years of experience in delivering high-performance and scalable web applications. Her expertise lies in modern web technologies such as React, Next.js, TypeScript, and WordPress. She maintains a strong focus on enhancing user experience (UX), ensuring accessibility, and optimizing for search engine performance (SEO). Justina has a proven track record of increasing conversion rates, improving page load performance, and building responsive interfaces across diverse sectors including fintech, e-commerce, and SaaS platforms.
+
+EDUCATION
+BSc Computer Science
+Elizade University
+
+CERTIFICATIONS
+Meta Frontend Development Certification: This certification covers comprehensive aspects of frontend development.
+Programming with JavaScript – Meta: Focused on advanced JavaScript programming concepts and best practices.
+Version Control – Meta: Training in effective use of version control systems, specifically Git and GitHub, for collaborative development.
