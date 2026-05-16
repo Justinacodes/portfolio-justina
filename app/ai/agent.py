@@ -1,12 +1,11 @@
-from strands import tool
 from groq import Groq
+from pathlib import Path
 import os
 
-# Populated by server.py before first request
-_embed = None
-_collection = None
-
 _groq = Groq(api_key=os.environ["GROQ_API_KEY"])
+
+# (doc_id, text) pairs loaded once at startup
+_docs: list[tuple[str, str]] = []
 
 SYSTEM_PROMPT = (
     "You are Justina Ominisan's AI portfolio assistant. "
@@ -16,17 +15,34 @@ SYSTEM_PROMPT = (
 )
 
 
-@tool
-def search_portfolio(query: str) -> str:
-    """Retrieve relevant sections from Justina's portfolio data."""
-    vecs = _embed.encode(query).tolist()
-    results = _collection.query(query_embeddings=[vecs], n_results=3)
-    docs = results["documents"][0]
-    return "\n\n---\n\n".join(docs) if docs else "No relevant information found."
+def load_docs(data_path: str = "./data") -> None:
+    """Load all .txt files from the data directory into memory."""
+    global _docs
+    _docs = []
+    for file in sorted(Path(data_path).glob("*.txt")):
+        text = file.read_text(encoding="utf-8").strip()
+        if text:
+            _docs.append((file.stem, text))
+    print(f"[startup] Loaded {len(_docs)} portfolio documents")
+
+
+def _search(query: str, n: int = 3) -> str:
+    """Return the top-n most relevant docs using keyword overlap scoring."""
+    if not _docs:
+        return "No portfolio information available."
+
+    query_tokens = set(query.lower().split())
+    scored = sorted(
+        _docs,
+        key=lambda pair: len(query_tokens & set(pair[1].lower().split())),
+        reverse=True,
+    )
+    top = [text for _, text in scored[:n]]
+    return "\n\n---\n\n".join(top)
 
 
 def chat(query: str) -> str:
-    context = search_portfolio(query)
+    context = _search(query)
 
     response = _groq.chat.completions.create(
         model="llama-3.3-70b-versatile",

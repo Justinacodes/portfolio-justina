@@ -1,7 +1,4 @@
-chromadb
-sentence-transformers
 groq
-strands-agents
 fastapi
 uvicorn[standard]
 python-dotenv
