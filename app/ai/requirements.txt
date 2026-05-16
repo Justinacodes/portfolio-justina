@@ -1,6 +1,7 @@
 chromadb
 sentence-transformers
-ollama
+groq
 strands-agents
 fastapi
 uvicorn[standard]
+python-dotenv

@@ -1,11 +1,12 @@
 from strands import tool
-from sentence_transformers import SentenceTransformer
-import chromadb
-import ollama
+from groq import Groq
+import os
 
-_embed = SentenceTransformer("all-MiniLM-L6-v2")
-_db = chromadb.PersistentClient(path="./chroma")
-_collection = _db.get_collection("portfolio")
+# Populated by server.py before first request
+_embed = None
+_collection = None
+
+_groq = Groq(api_key=os.environ["GROQ_API_KEY"])
 
 SYSTEM_PROMPT = (
     "You are Justina Ominisan's AI portfolio assistant. "
@@ -27,14 +28,18 @@ def search_portfolio(query: str) -> str:
 def chat(query: str) -> str:
     context = search_portfolio(query)
 
-    response = ollama.chat(
-        model="llama3.2",
+    response = _groq.chat.completions.create(
+        model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",
-                "content": f"{SYSTEM_PROMPT}\n\n=== Portfolio Context ===\n{context}\n========================",
+                "content": (
+                    f"{SYSTEM_PROMPT}\n\n"
+                    f"=== Portfolio Context ===\n{context}\n========================"
+                ),
             },
             {"role": "user", "content": query},
         ],
+        max_tokens=512,
     )
-    return response["message"]["content"]
+    return response.choices[0].message.content
