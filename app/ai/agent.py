@@ -14,16 +14,20 @@ SYSTEM_PROMPT = (
     "If the answer isn't covered, say so honestly."
 )
 
+# Default data directory is relative to this file, not the CWD
+_DEFAULT_DATA = Path(__file__).parent / "data"
 
-def load_docs(data_path: str = "./data") -> None:
+
+def load_docs(data_path: Path | None = None) -> None:
     """Load all .txt files from the data directory into memory."""
     global _docs
     _docs = []
-    for file in sorted(Path(data_path).glob("*.txt")):
+    path = data_path or _DEFAULT_DATA
+    for file in sorted(path.glob("*.txt")):
         text = file.read_text(encoding="utf-8").strip()
         if text:
             _docs.append((file.stem, text))
-    print(f"[startup] Loaded {len(_docs)} portfolio documents")
+    print(f"[startup] Loaded {len(_docs)} portfolio documents from {path}")
 
 
 def _search(query: str, n: int = 3) -> str:

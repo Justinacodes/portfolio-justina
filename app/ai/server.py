@@ -1,11 +1,21 @@
-from dotenv import load_dotenv
 from pathlib import Path as _Path
-load_dotenv(_Path(__file__).parent.parent.parent / ".env")
+import os
+
+# Load .env only when running locally (file won't exist on Render)
+_env_file = _Path(__file__).parent.parent.parent / ".env"
+if _env_file.exists():
+    from dotenv import load_dotenv
+    load_dotenv(_env_file)
+
+if not os.environ.get("GROQ_API_KEY"):
+    raise RuntimeError(
+        "GROQ_API_KEY is not set. "
+        "Add it in Render → Environment, or in your local .env file."
+    )
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import os
 
 from agent import chat, load_docs
 
