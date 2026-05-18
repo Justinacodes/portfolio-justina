@@ -1,0 +1,65 @@
+JUSTINA OMINISAN
+Remote Front-end Developer
+ justinaominisan@gmail.com
+🌐 justinaominisan.com.ng | 💻 github.com/justinacodes 
+
+PROFESSIONAL SUMMARY
+Results-driven Front-end Developer with over 3 years of experience delivering high-performance, scalable web applications. Specialised in React, Next.js, TypeScript and WordPress with a strong focus on user experience (UX), accessibility, and SEO optimisation. Proven ability to increase conversions, improve load performance, and build responsive interfaces across fintech, e-commerce, and SaaS platforms. 
+
+SKILLS AND EXPERTISE
+Frontend: React.js, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Sass, Tailwind CSS, Framer Motion
+Backend: Node.js, Express.js, REST APIs, MongoDB
+Tools: Git, GitHub, Agile/Scrum, CI/CD, WordPress
+Core Strengths: Responsive Design, SEO Optimisation, Performance Tuning, UI/UX Design, Debugging, Cross-browser Compatibility
+Soft Skills: Communication, Team Collaboration, Problem Solving, Time Management, Adaptability, Attention to Detail
+
+PROFESSIONAL EXPERIENCE
+Freelance Front-end Developer | Remote (January 2024 – Present)
+    • Delivered custom web solutions for clients across e-commerce, education, healthcare and SaaS sectors
+    • Designed SEO-optimised, mobile-first interfaces, improving organic traffic and search rankings
+    • Improved page performance using code splitting, lazy loading, and optimisation techniques
+    • Built responsive UI components, ensuring accessibility and cross-device compatibility
+    • Collaborated with clients to translate business goals into user-friendly digital experiences
+Lead Front-end Developer – Allwecure Pharmaceuticals (November 2025 – April 2026)
+    • Led a team of 3 developers to design and deliver a scalable, multi-role pharmaceutical e-commerce platform using Next.js and TypeScript 
+    • Architected and developed buyer, seller, and business developer dashboards, supporting multi-user workflows and improving platform usability 
+    • Implemented role-based access control (RBAC), enhancing security and ensuring proper permission handling across user roles 
+    • Integrated backend APIs for authentication, product management, and order processing, ensuring seamless data flow 
+    • Improved application performance, achieving faster load times and smoother navigation across devices 
+    • Collaborated with stakeholders to translate business requirements into scalable frontend solutions, contributing to successful product launch 
+    • Led code reviews and enforced best practices, improving code quality and team productivity 
+Front-end Developer – Integrated Software Services Limited (Apr 2024 – Nov 2024)
+    • Enhanced application UX resulting in 15% increase in conversions
+    • Reduced load time by 30% through performance optimisation
+    • Improved onboarding experience, reducing drop-offs by 10%
+    • Built reusable UI components for scalability
+    • Worked closely with product and backend teams
+Back-end Developer Intern – Tech4Dev (Oct 2023 – Apr 2024)
+    • Developed RESTful APIs and database schemas
+    • Improved backend reliability, reducing errors by 15%
+    • Collaborated with frontend teams for seamless integration
+    • Participated in debugging and system optimisation
+Front-end Developer Intern – Revocube Technologies (Aug 2022 – Oct 2023)
+    • Built responsive interfaces, improving engagement and usability
+    • Increased checkout rates by 12%
+    • Reduced page load time by 25%
+    • Fixed bugs and enhanced performance
+
+SELECTED PROJECTS 
+Allwecure
+    • Developed a healthcare procurement platform connecting suppliers and customers
+    • Built a responsive UI using Next.js and Tailwind CSS
+    • Focused on usability, accessibility, and trust
+AI Job Tracker
+    • Developed an AI-powered application using Next.js, TypeScript, and Appwrite
+    • Built features for job tracking, resume analysis, and cover letter generation
+    • Designed intuitive dashboards to improve user productivity
+Ride-Sharing Platform
+    • Built a full-stack application with real-time messaging and ride matching
+    • Integrated Google Maps API for location tracking
+    • Implemented a secure authentication system
+
+Tee-Essentials
+    • Built a React and Redux e-commerce platform
+    • Implemented cart, Wishlist, and filtering features
+    • Integrated Stripe for payments
