@@ -44,7 +44,7 @@ const Portfolio: React.FC = () => {
       categories: ["dashboard", "web-app"],
       technologies: ["NextJS", "Typescript", "TailwindCss", "Appwrite"],
       image: "jobtracker-placeholder",
-      demoUrl: "https://jobtrackerappnu.vercel.app",
+      demoUrl: "https://jobtrackerapp-nu.vercel.app",
       githubUrl: "https://github.com/Justinacodes"
     },
     {
