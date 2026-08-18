@@ -25,6 +25,14 @@ const config: Config = {
       },
       fontFamily: {
         'roboto': ['var(--font-roboto)', 'sans-serif'],
+        'display': ['var(--font-display)', 'var(--font-roboto)', 'sans-serif'],
+      },
+      colors: {
+        ink: '#1B1B1B',
+        cream: '#FBF5E4',
+        paper: '#FFFBF1',
+        accent: '#FF8906',
+        peach: '#E8B67E',
       }
     },
   },

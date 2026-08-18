@@ -15,9 +15,10 @@ if not os.environ.get("GROQ_API_KEY"):
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from agent import chat, load_docs
+from agent import chat, chat_stream, load_docs
 
 load_docs()
 
@@ -30,7 +31,7 @@ if extra := os.environ.get("ALLOWED_ORIGIN"):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_methods=["POST"],
+    allow_methods=["POST", "GET"],
     allow_headers=["Content-Type"],
 )
 
@@ -48,3 +49,29 @@ def chat_endpoint(req: ChatRequest):
     if not req.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty")
     return ChatResponse(response=chat(req.message))
+
+
+def _sse_generator(message: str):
+    """Yield SSE-formatted chunks from the streaming chat."""
+    try:
+        for chunk in chat_stream(message):
+            # Each SSE data line, double-newline to flush
+            yield f"data: {chunk}\n\n"
+        yield "data: [DONE]\n\n"
+    except Exception as e:
+        yield f"event: error\ndata: {str(e)}\n\n"
+
+
+@app.post("/chat/stream")
+def chat_stream_endpoint(req: ChatRequest):
+    if not req.message.strip():
+        raise HTTPException(status_code=400, detail="Message cannot be empty")
+    return StreamingResponse(
+        _sse_generator(req.message),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )

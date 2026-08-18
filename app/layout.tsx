@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import { Roboto, Space_Grotesk } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
@@ -8,6 +8,12 @@ const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-roboto',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  weight: ['500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-display',
 })
 
 export const metadata: Metadata = {
@@ -80,7 +86,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={roboto.className}>
+      <body className={`${roboto.className} ${spaceGrotesk.variable}`}>
         {children}
         <Analytics />
       </body>

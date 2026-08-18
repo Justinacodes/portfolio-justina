@@ -45,21 +45,39 @@ def _search(query: str, n: int = 3) -> str:
     return "\n\n---\n\n".join(top)
 
 
-def chat(query: str) -> str:
+def _build_messages(query: str) -> list[dict]:
+    """Build the messages list used by both streaming and non-streaming chat."""
     context = _search(query)
+    return [
+        {
+            "role": "system",
+            "content": (
+                f"{SYSTEM_PROMPT}\n\n"
+                f"=== Portfolio Context ===\n{context}\n========================"
+            ),
+        },
+        {"role": "user", "content": query},
+    ]
 
+
+def chat(query: str) -> str:
     response = _groq.chat.completions.create(
         model="llama-3.3-70b-versatile",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    f"{SYSTEM_PROMPT}\n\n"
-                    f"=== Portfolio Context ===\n{context}\n========================"
-                ),
-            },
-            {"role": "user", "content": query},
-        ],
+        messages=_build_messages(query),
         max_tokens=512,
     )
     return response.choices[0].message.content
+
+
+def chat_stream(query: str):
+    """Generator that yields text chunks as they arrive from Groq."""
+    stream = _groq.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=_build_messages(query),
+        max_tokens=512,
+        stream=True,
+    )
+    for chunk in stream:
+        delta = chunk.choices[0].delta
+        if delta.content:
+            yield delta.content

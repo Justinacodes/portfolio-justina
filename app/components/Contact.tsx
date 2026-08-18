@@ -66,66 +66,66 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-24 bg-cream border-t border-ink/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">Let us collaborate and bring your ideas to life!</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">Contact</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-ink mb-4">Get In Touch</h2>
+          <p className="text-lg text-ink/60">Let us collaborate and bring your ideas to life!</p>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Let&apos;s Work Together</h3>
-              <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                I am always interested in new opportunities and challenging projects. 
-                Whether you need a responsive website, a complex web application, or 
+              <h3 className="text-2xl font-display font-bold text-ink mb-4">Let&apos;s Work Together</h3>
+              <p className="text-lg text-ink/60 leading-relaxed mb-8">
+                I am always interested in new opportunities and challenging projects.
+                Whether you need a responsive website, a complex web application, or
                 just want to discuss your ideas, I would love to hear from you.
               </p>
             </div>
-            
+
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-ink/10">
+                  <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">Email</h4>
-                  <p className="text-gray-600">justinaominisan@gmail.com</p>
+                  <h4 className="text-lg font-semibold text-ink mb-1">Email</h4>
+                  <p className="text-ink/60">justinaominisan@gmail.com</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-ink/10">
+                  <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">Location</h4>
-                  <p className="text-gray-600">Nigeria</p>
+                  <h4 className="text-lg font-semibold text-ink mb-1">Location</h4>
+                  <p className="text-ink/60">Nigeria</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border border-ink/10">
+                  <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">Contact</h4>
-                  <p className="text-gray-600">+2347058635593</p>
+                  <h4 className="text-lg font-semibold text-ink mb-1">Contact</h4>
+                  <p className="text-ink/60">+2347058635593</p>
                 </div>
               </div>
             </div>
           </div>
-          
-          <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-xl shadow-lg">
+
+          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl border border-ink/10">
             {/* Status Message */}
             {submitStatus.type && (
               <div className={`mb-6 p-4 rounded-lg ${
@@ -162,10 +162,10 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-2 py-3 bg-transparent border-0 border-b-2 border-ink/15 focus:outline-none focus:border-accent transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
-              
+
               <div>
                 <input
                   type="email"
@@ -175,10 +175,10 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-2 py-3 bg-transparent border-0 border-b-2 border-ink/15 focus:outline-none focus:border-accent transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
-              
+
               <div>
                 <textarea
                   name="message"
@@ -188,14 +188,14 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-2 py-3 bg-transparent border-0 border-b-2 border-ink/15 focus:outline-none focus:border-accent transition-colors duration-300 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 ></textarea>
               </div>
-              
-              <button 
+
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center"
+                className="w-full px-8 py-3 bg-ink text-cream font-semibold rounded-full hover:bg-accent hover:text-ink transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 {isSubmitting ? (
                   <>

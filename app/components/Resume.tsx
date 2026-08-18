@@ -119,20 +119,20 @@ const Resume: React.FC = () => {
   ];
 
   return (
-    <section id="resume" className="py-20 bg-gray-50">
+    <section id="resume" className="py-24 bg-cream border-t border-ink/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">My Resume</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">Resume</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-ink mb-4">Experience &amp; Skills</h2>
+          <p className="text-lg text-ink/60 max-w-2xl mx-auto mb-8">
             A comprehensive overview of my educational background, professional experience, and technical expertise in front-end development.
           </p>
-          
+
           {/* Download CV Button */}
-          <a 
-            href="/justinaominisan.pdf" 
+          <a
+            href="/justinaominisan.pdf"
             download="justinaominisan.pdf"
-            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+            className="inline-flex items-center px-8 py-3 bg-ink text-cream font-semibold rounded-full hover:bg-accent hover:text-ink transition-colors duration-300"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -140,28 +140,28 @@ const Resume: React.FC = () => {
             Download CV
           </a>
         </div>
-        
+
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Education & Experience Timeline */}
           <div className="lg:col-span-1">
-            <div className="bg-white p-8 rounded-xl shadow-lg sticky top-24">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+            <div className="bg-white p-8 rounded-2xl border border-ink/10 sticky top-24">
+              <h3 className="text-2xl font-display font-bold text-ink mb-6 flex items-center">
+                <div className="w-8 h-8 bg-cream rounded-lg flex items-center justify-center mr-3">
                   ⚡
                 </div>
                 Core Skills
               </h3>
-              
+
               <div className="space-y-3">
                 {skills.map((skill, index) => (
-                  <div 
+                  <div
                     key={index}
-                    className="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-300 group"
+                    className="flex items-center p-3 bg-cream rounded-lg hover:bg-peach/30 hover:text-ink transition-colors duration-300 group"
                   >
                     <div className="w-8 h-8 mr-3 flex-shrink-0">
-                      <img 
-                        src={skill.image} 
+                      <img
+                        src={skill.image}
                         alt={skill.name}
                         className="w-full h-full object-contain"
                         onError={(e) => {
@@ -176,9 +176,9 @@ const Resume: React.FC = () => {
               </div>
 
               {/* Additional Info */}
-              <div className="mt-8 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-2">Available For</h4>
-                <ul className="text-sm text-gray-700 space-y-1">
+              <div className="mt-8 p-4 bg-cream rounded-lg border border-ink/10">
+                <h4 className="font-semibold text-ink mb-2">Available For</h4>
+                <ul className="text-sm text-ink/70 space-y-1">
                   <li>• Full-time positions</li>
                   <li>• Freelance projects</li>
                   <li>• Remote collaboration</li>
@@ -190,28 +190,28 @@ const Resume: React.FC = () => {
           <div className="lg:col-span-2">
             {/* Experience Section */}
             <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                  <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
-                  <Briefcase />
+                <h3 className="text-2xl font-display font-bold text-ink mb-6 flex items-center">
+                  <div className="w-8 h-8 bg-cream rounded-lg flex items-center justify-center mr-3 text-accent">
+                  <Briefcase size={18} />
                   </div>
                   Professional Experience
                 </h3>
                 {resumeData.filter((item: { type: string; }) => item.type === 'experience').map((item) => (
-                  <div key={item.id} className="bg-white p-6 rounded-xl shadow-lg mb-6 border-l-4 border-purple-600">
+                  <div key={item.id} className="bg-white p-6 rounded-2xl border border-ink/10 mb-6 border-l-4 border-l-accent">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h4>
-                        <h5 className="text-purple-600 font-medium mb-1">{item.organization}</h5>
-                        <p className="text-gray-500 text-sm">{item.location}</p>
+                        <h4 className="text-lg font-semibold text-ink mb-1">{item.title}</h4>
+                        <h5 className="text-accent font-medium mb-1">{item.organization}</h5>
+                        <p className="text-ink/50 text-sm">{item.location}</p>
                       </div>
-                      <span className="inline-block px-3 py-1 bg-amber-100 text-amber-600 text-sm font-semibold rounded-full mt-2 md:mt-0">
+                      <span className="inline-block px-3 py-1 bg-peach/30 text-ink text-sm font-semibold rounded-full mt-2 md:mt-0">
                         {item.period}
                       </span>
                     </div>
-                    <ul className="text-gray-600 space-y-1">
+                    <ul className="text-ink/70 space-y-1">
                       {item.description.map((desc, index) => (
                         <li key={index} className="flex items-start">
-                          <span className="text-purple-600 mr-2 mt-1">•</span>
+                          <span className="text-accent mr-2 mt-1">•</span>
                           {desc}
                         </li>
                       ))}
@@ -222,28 +222,28 @@ const Resume: React.FC = () => {
             <div className="space-y-8">
               {/* Education Section */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                  <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
-                    <GraduationCap />
+                <h3 className="text-2xl font-display font-bold text-ink mb-6 flex items-center">
+                  <div className="w-8 h-8 bg-cream rounded-lg flex items-center justify-center mr-3 text-accent">
+                    <GraduationCap size={18} />
                   </div>
                   Education
                 </h3>
                 {resumeData.filter(item => item.type === 'education').map((item) => (
-                  <div key={item.id} className="bg-white p-6 rounded-xl shadow-lg mb-6 border-l-4 border-indigo-600">
+                  <div key={item.id} className="bg-white p-6 rounded-2xl border border-ink/10 mb-6 border-l-4 border-l-ink">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h4>
-                        <h5 className="text-indigo-600 font-medium mb-1">{item.organization}</h5>
-                        <p className="text-gray-500 text-sm">{item.location}</p>
+                        <h4 className="text-lg font-semibold text-ink mb-1">{item.title}</h4>
+                        <h5 className="text-ink font-medium mb-1">{item.organization}</h5>
+                        <p className="text-ink/50 text-sm">{item.location}</p>
                       </div>
-                      <span className="inline-block px-3 py-1 bg-amber-100 text-amber-600 text-sm font-semibold rounded-full mt-2 md:mt-0">
+                      <span className="inline-block px-3 py-1 bg-peach/30 text-ink text-sm font-semibold rounded-full mt-2 md:mt-0">
                         {item.period}
                       </span>
                     </div>
-                    <ul className="text-gray-600 space-y-1">
+                    <ul className="text-ink/70 space-y-1">
                       {item.description.map((desc, index) => (
                         <li key={index} className="flex items-start">
-                          <span className="text-indigo-600 mr-2 mt-1">•</span>
+                          <span className="text-ink mr-2 mt-1">•</span>
                           {desc}
                         </li>
                       ))}

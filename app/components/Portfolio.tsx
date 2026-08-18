@@ -148,26 +148,26 @@ const Portfolio: React.FC = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20 bg-white">
+    <section id="portfolio" className="py-24 bg-white border-t border-ink/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">My Works</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">Portfolio</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-ink mb-4">My Works</h2>
+          <p className="text-lg text-ink/60 max-w-2xl mx-auto">
             Here are some of my recent projects that showcase my skills in front-end development,
             from interactive dashboards to comprehensive e-commerce solutions.
           </p>
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-6 mb-12 border-b border-ink/10">
           {categories.map((category) => (
             <button
               key={category.key}
               onClick={() => setActiveFilter(category.key)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${activeFilter === category.key
-                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              className={`pb-3 text-sm font-semibold uppercase tracking-wide border-b-2 transition-colors duration-300 ${activeFilter === category.key
+                ? 'text-ink border-accent'
+                : 'text-ink/40 border-transparent hover:text-ink'
                 }`}
             >
               {category.label}
@@ -180,7 +180,7 @@ const Portfolio: React.FC = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              className="group bg-white rounded-2xl overflow-hidden border border-ink/10 hover:border-ink/30 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
@@ -201,7 +201,7 @@ const Portfolio: React.FC = () => {
                     {project.demoUrl && (
                       <a
                         href={project.demoUrl}
-                        className="px-4 py-2 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors duration-300"
+                        className="px-4 py-2 bg-cream text-ink rounded-full font-semibold hover:bg-accent transition-colors duration-300"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -211,7 +211,7 @@ const Portfolio: React.FC = () => {
                     {project.githubUrl && (
                       <a
                         href={project.githubUrl}
-                        className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors duration-300"
+                        className="px-4 py-2 bg-ink text-cream rounded-full font-semibold hover:bg-accent hover:text-ink transition-colors duration-300"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -224,11 +224,11 @@ const Portfolio: React.FC = () => {
 
               {/* Project Details */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
+                <h3 className="text-xl font-display font-bold text-ink mb-3 group-hover:text-accent transition-colors duration-300">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-ink/60 mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -237,7 +237,7 @@ const Portfolio: React.FC = () => {
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-indigo-50 text-indigo-600 text-sm font-medium rounded-full"
+                      className="px-3 py-1 bg-cream text-ink/70 text-sm font-medium rounded-full"
                     >
                       {tech}
                     </span>

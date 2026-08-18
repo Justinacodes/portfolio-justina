@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.erinhq.com)",
+      "Bash(curl -s \"https://www.erinhq.com/_next/static/chunks/3f65453a0bedcdb3.css\" -A \"Mozilla/5.0\" -o /c/Users/dell/AppData/Local/Temp/claude/c--Users-dell-portfolio-justina/2451bf8f-d2a7-4bca-8aa3-33f552405c45/scratchpad/erin.css)",
+      "Read(//c/Users/dell/AppData/Local/Temp/claude/c--Users-dell-portfolio-justina/2451bf8f-d2a7-4bca-8aa3-33f552405c45/scratchpad/**)",
+      "Bash(npm init *)"
+    ]
+  }
+}

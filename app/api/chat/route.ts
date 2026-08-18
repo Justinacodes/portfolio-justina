@@ -22,7 +22,7 @@ async function fetchWithRetry(message: string): Promise<Response> {
       console.warn(`[chat] Python server not ready, retry ${attempt}/${MAX_RETRIES - 1}`)
     }
     try {
-      return await fetch(`${PYTHON_API_URL}/chat`, {
+      return await fetch(`${PYTHON_API_URL}/chat/stream`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
@@ -51,8 +51,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: err }, { status: response.status })
     }
 
-    const data = await response.json()
-    return NextResponse.json(data)
+    // Pipe the SSE stream directly to the client
+    return new Response(response.body, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+      },
+    })
   } catch (err) {
     console.error("[chat] Failed to reach Python server:", err)
     return NextResponse.json(
@@ -61,3 +67,4 @@ export async function POST(req: Request) {
     )
   }
 }
+
