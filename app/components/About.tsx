@@ -3,7 +3,6 @@ import React from 'react';
 import Reveal from './Reveal';
 
 const facts = [
-  { emoji: '\u{1F1F3}\u{1F1EC}', text: 'Based in Nigeria' },
   { emoji: '\u2601\uFE0F', text: 'AWS Certified AI Practitioner' },
   { emoji: '\u26A1', text: '4 years shipping production frontends' },
   { emoji: '\u{1F9E9}', text: 'Frontend, APIs & AI systems' },

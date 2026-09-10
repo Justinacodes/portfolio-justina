@@ -13,6 +13,7 @@ const links = [
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [active, setActive] = useState('');
   const pathname = usePathname();
   const isHome = pathname === '/';
@@ -23,10 +24,16 @@ const Header: React.FC = () => {
   // canvas is light, so the nav uses theme colours immediately.
   const onDark = isHome && !scrolled && !isMenuOpen;
   const solid = !onDark;
+  // True while the dark hero is still behind the nav: the pill stays dark so
+  // its corners/margins don't read as light gaps over the photo.
+  const onHeroDark = isHome && !isMenuOpen && !pastHero;
 
   // The nav pill only gains its surface once the hero is behind us.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      setPastHero(window.scrollY > window.innerHeight * 0.85);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -79,15 +86,17 @@ const Header: React.FC = () => {
       <div className="shell px-4 sm:px-6">
         <div
           className={`mt-4 flex items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-[background-color,border-color,backdrop-filter] duration-500 ease-editorial sm:px-5 ${
-            solid
-              ? 'border-line bg-canvas/80 backdrop-blur-xl'
-              : 'border-transparent bg-transparent'
+            !solid
+              ? 'border-transparent bg-transparent'
+              : onHeroDark
+                ? 'border-white/15 bg-black/35 backdrop-blur-xl'
+                : 'border-line bg-canvas/80 backdrop-blur-xl'
           }`}
         >
           <a
             href={resolve('#home')}
             className={`group flex shrink-0 items-center gap-2 whitespace-nowrap font-display text-base font-bold tracking-tight transition-colors duration-500 ${
-              solid ? 'text-fg' : 'text-white'
+              solid && !onHeroDark ? 'text-fg' : 'text-white'
             }`}
           >
             <span
@@ -110,10 +119,10 @@ const Header: React.FC = () => {
                       aria-current={isActive ? 'page' : undefined}
                       className={`inline-block rounded-full px-4 py-1.5 text-sm transition-colors duration-300 ${
                         isActive
-                          ? solid
+                          ? solid && !onHeroDark
                             ? 'bg-fg text-canvas'
                             : 'bg-white text-ink'
-                          : solid
+                          : solid && !onHeroDark
                             ? 'text-subtle hover:bg-fg/5 hover:text-fg'
                             : 'text-white/70 hover:bg-white/10 hover:text-white'
                       }`}
@@ -127,11 +136,11 @@ const Header: React.FC = () => {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <ThemeToggle onDark={onDark} />
+            <ThemeToggle onDark={onDark || onHeroDark} />
             <a
               href={resolve('#contact')}
               className={`hidden whitespace-nowrap rounded-full px-4 py-1.5 text-sm transition-colors duration-300 sm:inline-block ${
-                solid
+                solid && !onHeroDark
                   ? 'bg-fg/10 text-fg hover:bg-fg hover:text-canvas'
                   : 'bg-white/15 text-white hover:bg-white hover:text-ink'
               }`}
@@ -150,12 +159,12 @@ const Header: React.FC = () => {
               <span aria-hidden="true" className="flex w-4 flex-col items-end gap-[4px]">
                 <span
                   className={`h-[1.5px] transition-all duration-300 ease-editorial ${
-                    solid ? 'bg-fg' : 'bg-white'
+                    solid && !onHeroDark ? 'bg-fg' : 'bg-white'
                   } ${isMenuOpen ? 'w-4 translate-y-[5.5px] rotate-45' : 'w-4'}`}
                 />
                 <span
                   className={`h-[1.5px] transition-all duration-300 ease-editorial ${
-                    solid ? 'bg-fg' : 'bg-white'
+                    solid && !onHeroDark ? 'bg-fg' : 'bg-white'
                   } ${isMenuOpen ? 'w-4 -translate-y-[5.5px] -rotate-45' : 'w-2.5'}`}
                 />
               </span>
