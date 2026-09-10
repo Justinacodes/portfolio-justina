@@ -82,7 +82,7 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed left-0 top-0 z-50 w-full max-w-[100vw] overflow-x-clip">
       <div className="shell px-4 sm:px-6">
         <div
           className={`mt-4 flex items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-[background-color,border-color,backdrop-filter] duration-500 ease-editorial sm:px-5 ${

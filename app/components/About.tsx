@@ -32,7 +32,7 @@ const About: React.FC = () => {
             <Reveal delay={140}>
               <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
                 <a
-                  href="/justinaominisan.pdf"
+                  href="/Justina-Ominisan_CV.pdf"
                   download="justinaominisan.pdf"
                   className="inline-flex items-center rounded-full bg-fg/10 px-5 py-2.5 text-sm text-fg transition-colors duration-300 hover:bg-fg hover:text-canvas"
                 >

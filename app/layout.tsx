@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Roboto, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
@@ -88,6 +88,16 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  // Keep the light hero scrim readable against the browser UI in both themes.
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0e0d0c' },
+  ],
 }
 
 const structuredData = {

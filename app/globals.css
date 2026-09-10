@@ -29,11 +29,21 @@
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
+    /* Paint the root as well as the body: anything the body box doesn't cover
+       (side gutters, overscroll) otherwise falls back to the browser's default
+       white and shows as light strips beside the full-bleed hero. */
+    @apply bg-canvas;
+    /* `position: fixed` children (the nav) size to the layout viewport, which
+       on some Android/foldable presets is wider than the visual viewport. That
+       overhang grew scrollWidth past clientWidth and left an uncovered strip,
+       so clamp horizontal overflow here. */
+    overflow-x: clip;
   }
 
   body {
-    @apply bg-canvas font-roboto text-fg antialiased;
+    @apply min-h-screen w-full bg-canvas font-roboto text-fg antialiased;
     font-synthesis-weight: none;
+    overflow-x: clip;
   }
 
   ::selection {
