@@ -134,7 +134,7 @@ export default function ChatBot() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 transition-opacity duration-300 [body[data-menu-open]_&]:pointer-events-none [body[data-menu-open]_&]:opacity-0">
+    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6 transition-opacity duration-300 [body[data-menu-open]_&]:pointer-events-none [body[data-menu-open]_&]:opacity-0">
       {/* Chat panel */}
       {open && (
         <div className="w-[calc(100vw-3rem)] sm:w-96 bg-canvas rounded-2xl shadow-2xl border border-line flex flex-col overflow-hidden animate-fade-in">
@@ -224,7 +224,7 @@ export default function ChatBot() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-14 h-14 bg-ink text-cream rounded-full shadow-lg hover:bg-accent hover:scale-105 transition-all duration-300 ease-editorial flex items-center justify-center"
+        className="w-12 h-12 sm:w-14 sm:h-14 bg-ink text-cream rounded-full shadow-lg hover:bg-accent hover:scale-105 transition-all duration-300 ease-editorial flex items-center justify-center"
         aria-label={open ? "Close chat" : "Open chat"}
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}

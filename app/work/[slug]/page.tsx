@@ -56,7 +56,7 @@ function Block({ block }: { block: DetailBlock }) {
     case 'paragraph':
       return (
         <Reveal>
-          <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-subtle first:mt-0 sm:mt-5 sm:text-[1.0625rem]">
+          <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-subtle sm:mt-5 sm:text-[1.0625rem]">
             {block.text}
           </p>
         </Reveal>

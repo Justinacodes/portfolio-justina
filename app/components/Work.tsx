@@ -45,7 +45,7 @@ const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean
           <p className="relative font-mono text-meta uppercase text-canvas/50">
             {project.client}
           </p>
-          <ul className="relative flex flex-wrap gap-x-2 gap-y-2">
+          <ul className="relative flex min-w-0 flex-wrap gap-x-2 gap-y-2">
             {(project.stack ?? []).map((t) => (
               <li
                 key={t}
@@ -63,8 +63,8 @@ const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean
   const body = (
     <>
       {/* Meta row */}
-      <div className="mt-5 flex items-baseline justify-between gap-4">
-        <p className="meta truncate">
+      <div className="mt-5 flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+        <p className="meta min-w-0 sm:truncate">
           <span className="text-fg">{project.client}</span>
           <span className="mx-2 text-subtle" aria-hidden="true">
             &middot;
@@ -75,7 +75,7 @@ const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean
       </div>
 
       {/* Title */}
-      <h3 className="mt-3 font-display text-display-md font-bold text-fg">
+      <h3 className="mt-3 break-words font-display text-display-md font-bold text-fg">
         {project.title}
         {href && (
           <span
@@ -99,7 +99,7 @@ const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean
   );
 
   return (
-    <Reveal as="li" className="group">
+    <Reveal as="li" className="group min-w-0">
       {caseStudy ? (
         <Link href={href!} target="_blank" rel="noopener noreferrer" className="block">
           {visual}
@@ -148,7 +148,7 @@ const Work: React.FC = () => {
           </div>
         </Reveal>
 
-        <ul className="mt-14 grid gap-x-10 gap-y-16 sm:mt-16 lg:grid-cols-2">
+        <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-10 gap-y-14 sm:mt-16 sm:gap-y-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           {work.map((p, i) => (
             <Card key={p.id} project={p} priority={i < 2} caseStudy />
           ))}
@@ -166,7 +166,7 @@ const Work: React.FC = () => {
           </div>
         </Reveal>
 
-        <ul className="mt-14 grid gap-x-10 gap-y-16 sm:mt-16 lg:grid-cols-2">
+        <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-10 gap-y-14 sm:mt-16 sm:gap-y-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           {projects.map((p) => (
             <Card key={p.id} project={p} />
           ))}
