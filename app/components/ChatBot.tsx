@@ -134,22 +134,22 @@ export default function ChatBot() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 transition-opacity duration-300 [body[data-menu-open]_&]:pointer-events-none [body[data-menu-open]_&]:opacity-0">
       {/* Chat panel */}
       {open && (
-        <div className="w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-ink/10 flex flex-col overflow-hidden animate-fade-in">
+        <div className="w-[calc(100vw-3rem)] sm:w-96 bg-canvas rounded-2xl shadow-2xl border border-line flex flex-col overflow-hidden animate-fade-in">
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-3 bg-ink">
-            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
+          <div className="flex items-center gap-3 px-4 py-3.5 bg-ink">
+            <div className="w-8 h-8 rounded-full bg-cream/10 flex items-center justify-center shrink-0">
               <Bot size={16} className="text-accent" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-cream font-semibold text-sm">Justina's Assistant</p>
-              <p className="text-cream/50 text-xs">Ask me anything</p>
+              <p className="text-cream font-display font-bold text-sm">Justina&apos;s Assistant</p>
+              <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-cream/50">Ask me anything</p>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="text-cream/70 hover:text-accent transition-colors"
+              className="text-cream/70 hover:text-peach transition-colors"
               aria-label="Close chat"
             >
               <X size={18} />
@@ -196,8 +196,8 @@ export default function ChatBot() {
           </div>
 
           {/* Input */}
-          <div className="px-3 py-3 border-t border-ink/10">
-            <div className="flex items-center gap-2 bg-cream rounded-xl px-3 py-2">
+          <div className="px-3 py-3 border-t border-line">
+            <div className="flex items-center gap-2 bg-cream rounded-full px-4 py-2.5">
               <input
                 ref={inputRef}
                 type="text"
@@ -224,7 +224,7 @@ export default function ChatBot() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-14 h-14 bg-ink text-cream rounded-full shadow-lg hover:bg-accent hover:text-ink hover:scale-105 transition-all duration-200 flex items-center justify-center"
+        className="w-14 h-14 bg-ink text-cream rounded-full shadow-lg hover:bg-accent hover:scale-105 transition-all duration-300 ease-editorial flex items-center justify-center"
         aria-label={open ? "Close chat" : "Open chat"}
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}

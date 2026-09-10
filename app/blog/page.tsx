@@ -1,8 +1,17 @@
 import { prisma } from '@/app/lib/prisma'
+import type { Metadata } from 'next'
 import BlogCard from '@/app/components/BlogCard'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 import Link from 'next/link'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Blog · Justina Ominisan',
+  description: 'Thoughts, tutorials, and insights on frontend and AI engineering.',
+  alternates: { canonical: '/blog' },
+}
 
 export default async function BlogPage() {
   const posts = await prisma.post.findMany({
@@ -19,31 +28,61 @@ export default async function BlogPage() {
   })
 
   return (
-    <main className="min-h-screen bg-gray-50 pt-24 pb-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog</h1>
-          <p className="text-gray-500 text-lg">Thoughts, tutorials, and insights</p>
-        </div>
+    <div className="min-h-screen">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-fg focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-canvas"
+      >
+        Skip to content
+      </a>
+      <Header />
 
-        {posts.length === 0 ? (
-          <div className="text-center py-24 text-gray-400">
-            <p className="text-xl">No posts yet — check back soon!</p>
+      <main id="main" className="bg-canvas pb-20 pt-28 sm:pb-24 sm:pt-36">
+        <div className="shell">
+          <div className="max-w-measure">
+            <p className="meta">Writing</p>
+            <h1 className="mt-5 font-display text-display-lg font-bold text-fg sm:mt-6">
+              Blog
+            </h1>
+            <p className="mt-5 text-base text-subtle sm:mt-6 sm:text-lg">
+              Thoughts, tutorials, and insights
+            </p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
-          </div>
-        )}
 
-        <div className="mt-16 text-center">
-          <Link href="/" className="text-indigo-600 hover:text-indigo-700 font-medium transition-colors">
-            ← Back to Portfolio
-          </Link>
+          {posts.length === 0 ? (
+            <div className="mt-12 border-t border-line py-16 sm:mt-20 sm:py-24">
+              <p className="text-base text-subtle sm:text-lg">
+                No posts yet — check back soon!
+              </p>
+            </div>
+          ) : (
+            /* gap-px over a line-coloured bed draws hairline dividers between
+               cards; on mobile the single column keeps them as horizontal rules. */
+            <div className="mt-12 grid grid-cols-1 gap-px bg-line sm:mt-16 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+              {posts.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
+          )}
+
+          <div className="mt-16 border-t border-line pt-8 sm:mt-20">
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-2 meta text-subtle transition-colors duration-300 hover:text-fg"
+            >
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 ease-editorial group-hover:-translate-x-1"
+              >
+                &#8592;
+              </span>
+              Back to portfolio
+            </Link>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+
+      <Footer />
+    </div>
   )
 }

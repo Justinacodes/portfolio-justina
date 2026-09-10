@@ -16,3 +16,13 @@ Demonstrated expertise in Responsive Design, ensuring applications are fully fun
 Soft Skills:
 Excellent Communication skills, facilitating clear and effective interaction with team members and stakeholders. Strong Team Collaboration abilities, contributing positively to group projects and fostering a productive environment. Highly skilled in Problem Solving, approaching challenges with a logical and analytical mindset. Effective Time Management to meet deadlines and prioritize tasks efficiently. Adaptability to new technologies and changing project requirements. Meticulous Attention to Detail, ensuring high-quality and error-free work.
 Extract CV Details into Specific Text Files - Manus
+
+AI Engineering:
+Experienced building AI-powered applications beyond simple API calls. Works with AWS Bedrock and Amazon Nova Pro for LLM inference, AWS Bedrock Knowledge Bases for managed retrieval, and Retrieval-Augmented Generation (RAG) pipelines using hybrid Vector + BM25 search. Builds LLM integrations, streaming AI interfaces over Server-Sent Events (SSE), and reusable AI interface architectures deployed across multiple product surfaces. Comfortable with Python and FastAPI for AI service development, plus document parsing (pypdf, python-docx) and programmatic image rendering (Pillow).
+
+Cloud and Infrastructure:
+Practical experience with AWS, including AWS Bedrock, AWS Amplify and CloudFront, plus deployment platforms Vercel and Render. Holds the AWS Certified AI Practitioner certification. Has debugged real production issues involving HTTPS/mixed content, CDN behaviour and gateway timeouts in streaming architectures.
+
+Testing and Quality:
+Implements End-to-End (E2E) testing for critical business workflows, including automated coverage of KYC verification flows. Focused on automated QA and reducing regression risk in high-stakes dashboards.
+

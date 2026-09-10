@@ -1,61 +1,133 @@
 // components/Hero.tsx
-"use client"
 import React from 'react';
 
+/**
+ * Portrait hero. The source photo is 719x1080 (2:3), so on a wide viewport
+ * `object-cover` would have to discard ~70% of its height and crop into a face
+ * close-up. Instead the desktop layout contains the whole portrait on the right
+ * and fills the rest of the canvas with a blurred copy of the same image — its
+ * backdrop gradient then matches at every height, so the feathered edge blends
+ * away rather than showing a seam. Mobile viewports are already portrait, so
+ * there the photo simply goes full-bleed.
+ *
+ * Scrims are kept only as dark as the overlaid type needs, so the subject stays
+ * clearly visible.
+ */
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="pt-32 pb-20 bg-cream min-h-screen flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="text-center lg:text-left">
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">
-              Front-End Developer
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-ink leading-[1.1] mb-6">
-              Hi, I&apos;m <span className="text-accent">Justina</span> — I build web experiences people actually enjoy using
-            </h1>
-            <p className="text-lg text-ink/60 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              A front-end developer dedicated to creating intuitive, user-centered web experiences.
-              With a strong foundation in Next.js, React, JavaScript and TypeScript, I specialize in
-              building responsive, performant interfaces that make complex functionalities feel simple.
-            </p>
+    <section
+      id="home"
+      className="relative flex min-h-[100svh] items-end overflow-hidden bg-ink"
+    >
+      {/* Desktop: blurred fill so the contained portrait has nothing to step against */}
+      <div aria-hidden="true" className="absolute inset-0 hidden overflow-hidden lg:block">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/justy.jpeg"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+          className="h-full w-full scale-125 object-cover object-[70%_28%] blur-3xl"
+        />
+      </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-14">
-              <a href="#contact" className="px-8 py-3 bg-ink text-cream font-semibold rounded-full hover:bg-accent hover:text-ink transition-colors duration-300 text-center">
-                Get In Touch
-              </a>
-              <a href="#about" className="px-8 py-3 border border-ink/20 text-ink font-semibold rounded-full hover:border-ink hover:bg-ink hover:text-cream transition-colors duration-300 text-center">
-                About Me
-              </a>
-            </div>
+      {/* Mobile / tablet: full-bleed portrait */}
+      <div className="absolute inset-0 lg:hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/justy.jpeg"
+          alt="Justina Ominisan"
+          width={719}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover object-[58%_18%] sm:object-[62%_14%]"
+        />
+      </div>
 
-            <div className="flex justify-center lg:justify-start divide-x divide-ink/15">
-              <div className="pr-6">
-                <p className="text-3xl font-display font-bold text-ink">3+</p>
-                <p className="text-sm text-ink/50 uppercase tracking-wide">Years Experience</p>
-              </div>
-              <div className="px-6">
-                <p className="text-3xl font-display font-bold text-ink">10+</p>
-                <p className="text-sm text-ink/50 uppercase tracking-wide">Projects Shipped</p>
-              </div>
-              <div className="pl-6">
-                <p className="text-3xl font-display font-bold text-ink">100%</p>
-                <p className="text-sm text-ink/50 uppercase tracking-wide">Client Satisfaction</p>
-              </div>
-            </div>
-          </div>
+      {/* Desktop: the whole portrait, right-anchored, left edge feathered */}
+      <div
+        className="absolute inset-0 hidden lg:block"
+        style={{
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent 24%, rgba(0,0,0,0.35) 38%, rgba(0,0,0,0.85) 50%, #000 62%)',
+          maskImage:
+            'linear-gradient(to right, transparent 24%, rgba(0,0,0,0.35) 38%, rgba(0,0,0,0.85) 50%, #000 62%)',
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/justy.jpeg"
+          alt="Justina Ominisan"
+          width={719}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-contain object-right-bottom"
+        />
+      </div>
 
-          <div className="flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
-              <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-peach"></div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={'/justy.jpeg'}
-                alt='Justina Ominisan'
-                className='relative w-full h-full rounded-3xl object-cover border border-ink/10 shadow-sm'
-              />
-            </div>
-          </div>
+      {/* Scrims: bottom for the type, left wash so the headline holds contrast */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(12,11,10,0.88) 0%, rgba(12,11,10,0.6) 22%, rgba(12,11,10,0.16) 48%, rgba(12,11,10,0.04) 70%, rgba(12,11,10,0.24) 100%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 hidden lg:block"
+        style={{
+          background:
+            'linear-gradient(to right, rgba(12,11,10,0.94) 0%, rgba(12,11,10,0.88) 20%, rgba(12,11,10,0.66) 34%, rgba(12,11,10,0.3) 48%, rgba(12,11,10,0.06) 62%, transparent 74%)',
+        }}
+      />
+
+      <div className="shell relative w-full pb-20 pt-32 sm:pb-24">
+        <h1 className="max-w-[15ch] font-display text-display-xl font-bold lg:max-w-[13ch]">
+          <span className="fade-up block text-white" style={{ animationDelay: '100ms' }}>
+            Justina Ominisan.
+          </span>
+          <span
+            className="fade-up block text-white/45"
+            style={{ animationDelay: '220ms' }}
+          >
+            Frontend &amp; AI engineer.
+          </span>
+        </h1>
+
+        <p
+          className="fade-up mt-7 max-w-measure text-base leading-relaxed text-white/70 sm:text-lg"
+          style={{ animationDelay: '360ms' }}
+        >
+          I build web applications and AI-powered products — dashboards, RAG systems
+          and real-time LLM interfaces. AWS Certified AI Practitioner, based in Nigeria.
+        </p>
+
+        <div
+          className="fade-up mt-9 flex flex-wrap items-center gap-3"
+          style={{ animationDelay: '460ms' }}
+        >
+          <a
+            href="#work"
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink transition-colors duration-300 hover:bg-white/90"
+          >
+            View my work
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 ease-editorial group-hover:translate-y-0.5"
+            >
+              &#8595;
+            </span>
+          </a>
+          <a
+            href="#about"
+            className="inline-flex items-center rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
+          >
+            About me
+          </a>
         </div>
       </div>
     </section>

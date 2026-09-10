@@ -1,44 +1,78 @@
 // components/About.tsx
-"use client"
 import React from 'react';
+import Reveal from './Reveal';
+
+const facts = [
+  { emoji: '\u{1F1F3}\u{1F1EC}', text: 'Based in Nigeria' },
+  { emoji: '\u2601\uFE0F', text: 'AWS Certified AI Practitioner' },
+  { emoji: '\u26A1', text: '3+ years shipping production frontends' },
+  { emoji: '\u{1F9E9}', text: 'Frontend, APIs & AI systems' },
+];
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 bg-white border-t border-ink/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">About</p>
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-ink">Who I Am</h2>
-        </div>
+    <section id="about" className="scroll-mt-24 border-t border-line bg-canvas">
+      <div className="shell py-section">
+        <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <Reveal>
+              <h2 className="max-w-[24ch] font-display text-display-lg font-bold text-fg">
+                I&apos;m Justina, a frontend engineer working on AI products.
+              </h2>
+            </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2">
-            <div className="prose prose-lg text-ink/70 mb-8">
-              <p className="mb-6">
-                A passionate front-end developer with a strong foundation in modern web technologies.
-                My journey began with reading books on web development, which gave me a solid theoretical
-                understanding of HTML. However, my real growth started in 2022 when I interned as a
-                front-end developer at Revocube Technologies, where I gained hands-on experience and
-                practical insights into building interactive web applications.
+            <Reveal delay={80}>
+              <p className="mt-8 max-w-[62ch] text-lg leading-relaxed text-subtle">
+                I build the interfaces people actually use — and increasingly the APIs
+                and AI systems behind them. Lately that&apos;s meant AI Studio across a
+                dozen dashboards, a retrieval pipeline for a bank, and getting LLM
+                streaming to behave in production.
               </p>
+            </Reveal>
 
-              <p className="mb-6">
-                My experience spans across crafting interactive shopping carts, sophisticated dashboards,
-                and robust search features, always with a focus on clean, modular code that&apos;s easy to
-                maintain and scale.
-              </p>
-            </div>
+            <Reveal delay={140}>
+              <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <a
+                  href="/justinaominisan.pdf"
+                  download="justinaominisan.pdf"
+                  className="inline-flex items-center rounded-full bg-fg/10 px-5 py-2.5 text-sm text-fg transition-colors duration-300 hover:bg-fg hover:text-canvas"
+                >
+                  Download resume
+                </a>
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center gap-2 text-sm text-fg"
+                >
+                  <span className="underline decoration-line underline-offset-4 transition-colors group-hover:decoration-accent">
+                    Say hello
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-300 ease-editorial group-hover:translate-x-1"
+                  >
+                    &#8594;
+                  </span>
+                </a>
+              </div>
+            </Reveal>
           </div>
 
-          <div className="space-y-6">
-            <div className="border border-ink/10 p-6 rounded-2xl text-center hover:border-accent transition-colors duration-300">
-              <h3 className="text-3xl font-display font-bold text-accent mb-2">3+</h3>
-              <p className="text-ink/70 font-semibold">Years of Experience</p>
-            </div>
-            <div className="border border-ink/10 p-6 rounded-2xl text-center hover:border-accent transition-colors duration-300">
-              <h3 className="text-3xl font-display font-bold text-accent mb-2">100%</h3>
-              <p className="text-ink/70 font-semibold">Client Satisfaction</p>
-            </div>
+          <div className="lg:col-span-4">
+            <Reveal delay={100}>
+              <ul className="space-y-4">
+                {facts.map((fact) => (
+                  <li
+                    key={fact.text}
+                    className="flex items-start gap-3 text-[0.9375rem] text-subtle"
+                  >
+                    <span aria-hidden="true" className="shrink-0">
+                      {fact.emoji}
+                    </span>
+                    <span>{fact.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </div>
       </div>

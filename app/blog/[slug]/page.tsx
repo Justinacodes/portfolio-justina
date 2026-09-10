@@ -1,7 +1,10 @@
 import { prisma } from '@/app/lib/prisma'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 
 export const revalidate = 60
 
@@ -17,6 +20,30 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }))
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const post = await prisma.post.findUnique({
+    where: { slug, published: true },
+    select: { title: true, excerpt: true, coverImageUrl: true },
+  })
+  if (!post) return {}
+
+  const description = post.excerpt ?? undefined
+  return {
+    title: `${post.title} · Justina Ominisan`,
+    description,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description,
+      url: `/blog/${slug}`,
+      type: 'article',
+      ...(post.coverImageUrl ? { images: [post.coverImageUrl] } : {}),
+    },
+    twitter: { card: 'summary_large_image', title: post.title, description },
+  }
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await prisma.post.findUnique({
@@ -26,50 +53,91 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound()
 
   return (
-    <main className="min-h-screen bg-gray-50 pt-24 pb-16">
-      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link
-          href="/blog"
-          className="text-indigo-600 hover:text-indigo-700 font-medium mb-8 inline-block transition-colors"
-        >
-          ← Back to Blog
-        </Link>
+    <div className="min-h-screen">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-fg focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-canvas"
+      >
+        Skip to content
+      </a>
+      <Header />
 
-        {post.coverImageUrl && (
-          <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8">
-            <Image
-              src={post.coverImageUrl}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
+      <main id="main" className="bg-canvas pb-20 pt-28 sm:pb-24 sm:pt-36">
+        <article className="mx-auto w-full max-w-3xl px-5 sm:px-8">
+          <Link
+            href="/blog"
+            className="group inline-flex items-center gap-2 meta text-subtle transition-colors duration-300 hover:text-fg"
+          >
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 ease-editorial group-hover:-translate-x-1"
+            >
+              &#8592;
+            </span>
+            Back to blog
+          </Link>
 
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
-          {post.publishedAt && (
-            <time className="text-gray-500 text-sm">
-              {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
+          <header className="mt-8 sm:mt-10">
+            {post.publishedAt && (
+              <time
+                dateTime={new Date(post.publishedAt).toISOString()}
+                className="meta text-accent"
+              >
+                {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+            )}
+            <h1 className="mt-4 font-display text-display-lg font-bold text-fg sm:mt-5">
+              {post.title}
+            </h1>
+          </header>
+
+          {post.coverImageUrl && (
+            <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-lg border border-line sm:mt-12">
+              <Image
+                src={post.coverImageUrl}
+                alt={post.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+                priority
+              />
+            </div>
           )}
-        </header>
 
-        {post.excerpt && (
-          <p className="text-xl text-gray-600 mb-8 pb-8 border-b border-gray-200 leading-relaxed">
-            {post.excerpt}
-          </p>
-        )}
+          {post.excerpt && (
+            <p className="mt-8 border-l border-accent pl-4 text-base text-fg/80 sm:mt-12 sm:pl-5 sm:text-lg">
+              {post.excerpt}
+            </p>
+          )}
 
-        <div className="text-gray-700 leading-relaxed whitespace-pre-wrap text-lg">
-          {post.content}
-        </div>
-      </article>
-    </main>
+          {/* break-words stops long URLs or code tokens from forcing the page
+              to scroll sideways on narrow screens. */}
+          <div className="mt-8 whitespace-pre-wrap break-words border-t border-line pt-8 text-base leading-relaxed text-fg/80 sm:mt-12 sm:pt-12 sm:text-lg">
+            {post.content}
+          </div>
+
+          <div className="mt-16 border-t border-line pt-8 sm:mt-20">
+            <Link
+              href="/blog"
+              className="group inline-flex items-center gap-2 meta text-subtle transition-colors duration-300 hover:text-fg"
+            >
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 ease-editorial group-hover:-translate-x-1"
+              >
+                &#8592;
+              </span>
+              All posts
+            </Link>
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+    </div>
   )
 }

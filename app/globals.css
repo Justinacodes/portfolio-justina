@@ -3,25 +3,138 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Light theme (default) */
+    --canvas: 255 255 255;
+    --surface: 248 247 245;
+    --fg: 20 18 17;
+    --subtle: 116 111 106;
+    --line: 228 224 219;
+    --accent: 181 77 4;
+  }
+
+  .dark {
+    /* Dark theme — warm-neutral near-black, not blue-black */
+    --canvas: 14 13 12;
+    --surface: 24 22 21;
+    --fg: 247 245 242;
+    --subtle: 156 149 142;
+    --line: 42 39 37;
+    --accent: 232 150 74;
+  }
+
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
   }
-  
+
   body {
-    @apply font-roboto antialiased;
+    @apply bg-canvas font-roboto text-fg antialiased;
+    font-synthesis-weight: none;
+  }
+
+  ::selection {
+    @apply bg-accent text-canvas;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
 @layer components {
+  /* Preserved: blog post bodies use .prose / .prose-lg */
   .prose {
-    @apply text-gray-600;
+    @apply text-subtle;
   }
-  
+
   .prose p {
     @apply mb-4 leading-7;
   }
-  
+
   .prose-lg {
     @apply text-lg;
+  }
+
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+
+  /* Tiny uppercase meta label — the reference's card/section eyebrow */
+  .meta {
+    @apply font-mono text-meta uppercase text-subtle;
+  }
+}
+
+@layer utilities {
+  /* ---- Scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s var(--ease-editorial), transform 0.8s var(--ease-editorial);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fade-up 0.9s var(--ease-editorial) forwards;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

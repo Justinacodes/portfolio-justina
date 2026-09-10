@@ -1,6 +1,6 @@
 
 JUSTINA OMINISAN
-Remote Front-end Developer
+Frontend Engineer / AI Engineer
 
 Contact Information:
 Phone: +234 705 863 5593
@@ -16,6 +16,7 @@ BSc Computer Science
 Elizade University
 
 CERTIFICATIONS
+AWS Certified AI Practitioner (Amazon Web Services): Justina's most recent certification, covering AI/ML concepts, generative AI, foundation models and responsible AI on AWS.
 Meta Frontend Development Certification: This certification covers comprehensive aspects of frontend development.
 Programming with JavaScript – Meta: Focused on advanced JavaScript programming concepts and best practices.
 Version Control – Meta: Training in effective use of version control systems, specifically Git and GitHub, for collaborative development.

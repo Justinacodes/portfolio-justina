@@ -13,34 +13,42 @@ interface PostSummary {
 export default function BlogCard({ post }: { post: PostSummary }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 h-full flex flex-col">
+      <article className="flex h-full flex-col bg-canvas px-0 py-6 transition-colors duration-500 sm:p-6 sm:hover:bg-surface">
         {post.coverImageUrl ? (
-          <div className="relative w-full h-48 overflow-hidden">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-line">
             <Image
               src={post.coverImageUrl}
               alt={post.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-[900ms] ease-editorial group-hover:scale-[1.04]"
             />
           </div>
         ) : (
-          <div className="w-full h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shrink-0">
-            <span className="text-white text-5xl font-bold opacity-80">
+          <div className="flex aspect-[16/10] w-full shrink-0 items-center justify-center rounded-lg border border-line bg-surface">
+            <span
+              className="font-display text-4xl font-bold text-fg/20 sm:text-5xl"
+              aria-hidden="true"
+            >
               {post.title[0].toUpperCase()}
             </span>
           </div>
         )}
-        <div className="p-6 flex flex-col flex-1">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors leading-snug">
+
+        <div className="mt-5 flex flex-1 flex-col sm:mt-6">
+          <h2 className="font-display text-lg font-bold leading-snug text-fg transition-colors duration-300 group-hover:text-accent sm:text-xl">
             {post.title}
           </h2>
           {post.excerpt && (
-            <p className="text-gray-500 text-sm flex-1 line-clamp-3 leading-relaxed">
+            <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-subtle line-clamp-3">
               {post.excerpt}
             </p>
           )}
           {post.publishedAt && (
-            <time className="text-gray-400 text-xs mt-4 block">
+            <time
+              dateTime={new Date(post.publishedAt).toISOString()}
+              className="mt-5 block meta text-subtle sm:mt-6"
+            >
               {new Date(post.publishedAt).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
@@ -49,7 +57,7 @@ export default function BlogCard({ post }: { post: PostSummary }) {
             </time>
           )}
         </div>
-      </div>
+      </article>
     </Link>
   )
 }

@@ -1,0 +1,69 @@
+DATAMELLON — FRONTEND / AI ENGINEER (2026 – Present)
+
+Justina Ominisan works at Datamellon as a Frontend / AI Engineer, building production
+frontends and the AI systems behind them. Her work there covers enterprise dashboards,
+an AI Studio shipped across twelve product surfaces, a banking AI proof of concept, and
+real-time LLM streaming.
+
+PROJECT: ENTERPRISE COMPLIANCE PLATFORM — CORE UI REDESIGN + E2E TESTING
+Justina led the UI redesign and frontend overhaul for two important modules of the platform:
+the KYC Dashboard and the Admin Dashboard. She also implemented comprehensive
+End-to-End (E2E) testing for the KYC dashboard workflow.
+Technical ownership: UI/UX modernization, frontend architecture, dashboard development,
+automated E2E testing, and critical business workflow validation.
+Impact: Improved the usability and consistency of critical identity-verification and
+administrative workflows while reducing regression risk through automated E2E coverage.
+
+PROJECT: COMPLIANCE PLATFORM — AI STUDIO INTEGRATION ACROSS 12 DASHBOARDS
+Justina designed the complete UI and implemented the backend API endpoints powering the
+AI Studio across 12 dashboards.
+Technical ownership: UI/UX design, frontend implementation, API development, API
+integration, reusable AI interface architecture, and multi-dashboard integration.
+Impact: Scaled AI capabilities across the platform ecosystem and established a
+consistent AI experience across 12 distinct functional areas. This is one of her
+strongest AI engineering accomplishments.
+
+PROJECT: BANKING AI POC — AI JOURNEY MAP GENERATOR
+Justina architected and built a FastAPI service that converts standard text/SOP documents
+into branded, production-ready PNG journey maps.
+Technology: FastAPI, Uvicorn, Amazon Nova Pro, AWS Bedrock, AWS Bedrock Knowledge Bases,
+hybrid Vector + BM25 search, pypdf, python-docx, Pillow, Python.
+How it works: The application accepts SOP/document content, retrieves relevant information
+using hybrid search, uses an LLM to interpret the content, and generates a structured
+journey map rendered as a PNG. The rendering system follows the client's corporate
+visual identity.
+Impact: Automated a previously manual design process while combining document parsing,
+retrieval-augmented generation, LLM reasoning, and programmatic image rendering into one
+workflow. It demonstrates the ability to build AI systems beyond simply calling an AI API.
+
+PROJECT: AI ANALYTICS PLATFORM — ANALYTICS & TIMELINE DASHBOARDS
+Justina implemented UI for multiple analytics dashboards, including a complex Gantt-style
+timeline dashboard, and developed frontend logic to consume analytics APIs.
+Technical ownership: Frontend UI implementation, state management, API integration, data
+transformation, and interactive timeline visualization.
+Impact: Converted raw backend analytics data into intuitive visual dashboards that made
+project and timeline information significantly easier for stakeholders to understand.
+
+PROJECT: AI ASSISTANT PLATFORM — RAG & LLM STREAMING PLATFORM
+Justina handled client-side API integration for a RAG/LLM platform, consuming streaming
+endpoints to provide real-time responses.
+Technical ownership: Streaming API integration, client-side SSE handling, RAG interface
+development, real-time UI updates, and error handling.
+Impact: Delivered a low-latency AI chat experience with real-time, character-by-character
+response rendering.
+
+SELECTED ENGINEERING CHALLENGE: PRODUCTION STREAMING INCIDENT
+Challenge: Real-time LLM streaming failed after deployment to AWS Amplify production. The
+issue involved HTTPS/HTTP mixed-content problems, CloudFront behavior, premature gateway
+timeouts, and legacy SSE proxy logic.
+Contribution: Justina participated in debugging sessions with the Tech Lead and backend
+team. She then refactored client-side streaming consumption, migrated consumption to
+secure HTTPS endpoints, adjusted timeout behavior to 60 seconds, and removed/cleaned up
+legacy SSE proxy logic.
+Result: Restored reliable production streaming and gained deeper practical experience with
+SSE, HTTPS, AWS Amplify, CloudFront, gateway timeouts, and client/server streaming
+architecture.
+
+CERTIFICATION
+AWS Certified AI Practitioner — Amazon Web Services. This is Justina's most recent
+certification.
