@@ -40,7 +40,7 @@ function Block({ block }: { block: DetailBlock }) {
     case 'heading':
       return (
         <Reveal>
-          <h2 className="mt-16 border-t border-line pt-8 font-display text-display-md font-bold text-fg first:mt-0">
+          <h2 className="mt-12 border-t border-line pt-6 font-display text-display-md font-bold text-fg first:mt-0 sm:mt-16 sm:pt-8">
             {block.text}
           </h2>
         </Reveal>
@@ -49,14 +49,14 @@ function Block({ block }: { block: DetailBlock }) {
     case 'subheading':
       return (
         <Reveal>
-          <h3 className="mt-12 font-display text-xl font-bold text-fg">{block.text}</h3>
+          <h3 className="mt-9 pb-1 font-display text-lg font-bold text-fg sm:mt-12 sm:pb-1.5 sm:text-xl">{block.text}</h3>
         </Reveal>
       )
 
     case 'paragraph':
       return (
         <Reveal>
-          <p className="mt-5 max-w-[68ch] text-[1.0625rem] leading-relaxed text-subtle">
+          <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-subtle first:mt-0 sm:mt-5 sm:text-[1.0625rem]">
             {block.text}
           </p>
         </Reveal>
@@ -71,7 +71,7 @@ function Block({ block }: { block: DetailBlock }) {
               {block.items.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-3 text-[1.0625rem] leading-relaxed text-subtle"
+                  className="flex gap-3 text-base leading-relaxed text-subtle sm:text-[1.0625rem]"
                 >
                   <span
                     aria-hidden="true"
@@ -88,17 +88,17 @@ function Block({ block }: { block: DetailBlock }) {
     case 'flow':
       return (
         <Reveal>
-          <ol className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-3">
+          <ol className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2.5 sm:mt-7 sm:gap-x-3 sm:gap-y-3">
             {block.steps.map((step, i) => (
-              <li key={step} className="flex items-center gap-3">
-                <span className="rounded-full border border-line bg-surface px-4 py-2 text-[0.8125rem] text-fg">
-                  {step}
-                </span>
-                {i < block.steps.length - 1 && (
+              <li key={step} className="flex items-center gap-2 sm:gap-3">
+                {i > 0 && (
                   <span aria-hidden="true" className="text-subtle">
                     &#8594;
                   </span>
                 )}
+                <span className="rounded-full border border-line bg-surface px-3.5 py-1.5 text-[0.8125rem] text-fg sm:px-4 sm:py-2">
+                  {step}
+                </span>
               </li>
             ))}
           </ol>
@@ -150,7 +150,7 @@ export default async function WorkDetailPage({ params }: Props) {
       </a>
       <Header />
 
-      <main id="main" className="bg-canvas pt-32 sm:pt-36">
+      <main id="main" className="bg-canvas pt-28 sm:pt-36">
         <article className="shell">
           {/* Back */}
           <Link
@@ -172,20 +172,20 @@ export default async function WorkDetailPage({ params }: Props) {
               {project.client}
             </h1>
             {project.subtitle && (
-              <p className="mt-4 max-w-[34ch] font-display text-display-md font-bold text-subtle">
+              <p className="mt-3 max-w-[30ch] font-display text-display-md font-bold text-subtle sm:mt-4">
                 {project.subtitle}
               </p>
             )}
           </header>
 
           {project.role && (
-            <p className="mt-8 max-w-[60ch] text-[0.9375rem] leading-relaxed text-accent">
+            <p className="mt-6 max-w-[46ch] text-sm leading-relaxed text-accent sm:mt-8 sm:text-[0.9375rem]">
               {project.role}
             </p>
           )}
 
           {/* Meta strip */}
-          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-6 border-y border-line py-6">
+          <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 sm:mt-10 sm:flex sm:flex-wrap sm:gap-x-12 sm:gap-y-6 sm:pt-6">
             {project.year && (
               <div>
                 <dt className="meta">Year</dt>
@@ -206,16 +206,16 @@ export default async function WorkDetailPage({ params }: Props) {
           </dl>
 
           {/* Body */}
-          <div className="mt-16 grid gap-x-16 gap-y-12 lg:grid-cols-12">
-            <div className="lg:col-span-8">
+          <div className="mt-8 grid gap-x-16 gap-y-10 sm:mt-12 lg:grid-cols-12 lg:gap-y-12">
+            <div className="order-2 lg:order-1 lg:col-span-8">
               {(project.detail ?? []).map((block, i) => (
                 <Block key={i} block={block} />
               ))}
             </div>
 
             {/* Sidebar */}
-            <aside className="lg:col-span-4">
-              <div className="lg:sticky lg:top-28">
+            <aside className="order-1 lg:order-2 lg:col-span-4">
+              <div className="border-b border-line pb-8 lg:sticky lg:top-28 lg:border-0 lg:pb-0">
                 {project.stack && project.stack.length > 0 && (
                   <>
                     <p className="meta border-b border-line pb-3 text-fg">Technologies</p>
@@ -267,7 +267,7 @@ export default async function WorkDetailPage({ params }: Props) {
               href={`/work/${next.id}`}
               className="group mt-4 flex flex-wrap items-baseline justify-between gap-4"
             >
-              <span className="font-display text-display-md font-bold text-fg transition-colors duration-300 group-hover:text-accent">
+              <span className="max-w-[26ch] font-display text-xl font-bold text-fg transition-colors duration-300 group-hover:text-accent sm:max-w-none sm:text-display-md">
                 {next.client} — {next.title}
               </span>
               <span

@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/blog' },
 }
 
-export default async function BlogPage() {
-  const posts = await prisma.post.findMany({
+function fetchPosts() {
+  return prisma.post.findMany({
     where: { published: true },
     orderBy: { publishedAt: 'desc' },
     select: {
@@ -26,6 +26,17 @@ export default async function BlogPage() {
       publishedAt: true,
     },
   })
+}
+
+export default async function BlogPage() {
+  let posts: Awaited<ReturnType<typeof fetchPosts>> = []
+  try {
+    posts = await fetchPosts()
+  } catch (error) {
+    // A database outage shouldn't break the build or the page; show the
+    // empty state instead.
+    console.warn('[blog] Could not load posts:', error)
+  }
 
   return (
     <div className="min-h-screen">

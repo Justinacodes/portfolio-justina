@@ -13,18 +13,43 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    select: { slug: true },
-  })
-  return posts.map((post) => ({ slug: post.slug }))
+  // Never fail the build on a database hiccup: prerender what we can, and fall
+  // back to rendering on first request (revalidate still caches afterwards).
+  try {
+    const posts = await prisma.post.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
+    return posts.map((post) => ({ slug: post.slug }))
+  } catch (error) {
+    console.warn('[blog] Skipping prerender, database unreachable:', error)
+    return []
+  }
+}
+
+/**
+ * Fetch one published post. Returns null when the row is missing *or* when the
+ * database is unreachable, so a DB outage renders a 404 rather than failing
+ * the build or throwing a 500.
+ */
+async function getPost<T extends Record<string, true>>(slug: string, select?: T) {
+  try {
+    return await prisma.post.findUnique({
+      where: { slug, published: true },
+      ...(select ? { select } : {}),
+    })
+  } catch (error) {
+    console.warn('[blog] Could not load post:', slug, error)
+    return null
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = await prisma.post.findUnique({
-    where: { slug, published: true },
-    select: { title: true, excerpt: true, coverImageUrl: true },
+  const post = await getPost(slug, {
+    title: true,
+    excerpt: true,
+    coverImageUrl: true,
   })
   if (!post) return {}
 
@@ -46,9 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  const post = await prisma.post.findUnique({
-    where: { slug, published: true },
-  })
+  const post = await getPost(slug)
 
   if (!post) notFound()
 
