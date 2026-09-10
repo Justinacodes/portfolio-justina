@@ -13,6 +13,73 @@ const GREETING: Message = {
     "Hi! I'm Justina's AI assistant. Ask me anything about her skills, projects, or experience.",
 }
 
+/** Inline markdown: **bold**, *italic*, `code`. Text is never injected as HTML. */
+function renderInline(text: string, keyPrefix: string) {
+  const nodes: React.ReactNode[] = []
+  const pattern = /(\*\*[^*]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
+  let last = 0
+  let m: RegExpExecArray | null
+  let i = 0
+
+  while ((m = pattern.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index))
+    const tok = m[0]
+    const key = `${keyPrefix}-${i++}`
+    if (tok.startsWith("**")) {
+      nodes.push(<strong key={key} className="font-semibold">{tok.slice(2, -2)}</strong>)
+    } else if (tok.startsWith("`")) {
+      nodes.push(
+        <code key={key} className="rounded bg-ink/10 px-1 py-0.5 font-mono text-[0.8em]">
+          {tok.slice(1, -1)}
+        </code>
+      )
+    } else {
+      nodes.push(<em key={key}>{tok.slice(1, -1)}</em>)
+    }
+    last = m.index + tok.length
+  }
+  if (last < text.length) nodes.push(text.slice(last))
+  return nodes
+}
+
+/** Render assistant markdown as paragraphs and bullet lists. */
+function Markdown({ text }: { text: string }) {
+  const lines = text.split("\n")
+  const blocks: React.ReactNode[] = []
+  let bullets: string[] = []
+
+  const flush = () => {
+    if (!bullets.length) return
+    blocks.push(
+      <ul key={`ul-${blocks.length}`} className="my-1.5 space-y-1 pl-4">
+        {bullets.map((b, i) => (
+          <li key={i} className="list-disc">{renderInline(b, `li-${blocks.length}-${i}`)}</li>
+        ))}
+      </ul>
+    )
+    bullets = []
+  }
+
+  lines.forEach((raw, idx) => {
+    const line = raw.trimEnd()
+    const bullet = line.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)$/)
+    if (bullet) {
+      bullets.push(bullet[1])
+      return
+    }
+    flush()
+    if (!line.trim()) return
+    blocks.push(
+      <p key={`p-${idx}`} className="my-1 first:mt-0 last:mb-0">
+        {renderInline(line, `p-${idx}`)}
+      </p>
+    )
+  })
+  flush()
+
+  return <>{blocks}</>
+}
+
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([GREETING])
@@ -87,11 +154,18 @@ export default function ChatBot() {
         const lines = buffer.split("\n")
         buffer = lines.pop() ?? "" // Keep the incomplete last line
 
-        for (const line of lines) {
-          const trimmed = line.trim()
-          if (!trimmed || !trimmed.startsWith("data: ")) continue
-          const data = trimmed.slice(6) // Remove "data: " prefix
-          if (data === "[DONE]") continue
+        for (const rawLine of lines) {
+          // Strip only CRLF framing — trimming here would eat the token's own
+          // leading/trailing spaces and run words together.
+          const line = rawLine.endsWith("\r") ? rawLine.slice(0, -1) : rawLine
+          if (!line.startsWith("data: ")) continue
+          const raw = line.slice(6)
+          if (raw === "[DONE]" || raw === "") continue
+          // The server escapes newlines (a bare newline is the SSE record
+          // separator and would be dropped); decode them back here.
+          const data = raw
+            .replace(/\\n/g, "\n")
+            .replace(/\\\\/g, "\\")
 
           setMessages((prev) => {
             const updated = [...prev]
@@ -185,6 +259,8 @@ export default function ChatBot() {
                       <span className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce [animation-delay:150ms]" />
                       <span className="w-1.5 h-1.5 bg-accent rounded-full animate-bounce [animation-delay:300ms]" />
                     </span>
+                  ) : msg.role === "assistant" ? (
+                    <Markdown text={msg.content} />
                   ) : (
                     msg.content
                   )}

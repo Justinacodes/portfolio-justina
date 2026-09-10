@@ -52,14 +52,23 @@ def chat_endpoint(req: ChatRequest):
 
 
 def _sse_generator(message: str):
-    """Yield SSE-formatted chunks from the streaming chat."""
+    """Yield SSE-formatted chunks from the streaming chat.
+
+    A newline is the SSE record separator, so a token that *is* a newline
+    was emitted as an empty record and dropped by the client. That silently
+    stripped every line break from the reply, running headings into the
+    following bullet. Escape newlines on the wire; the client decodes them.
+    """
     try:
         for chunk in chat_stream(message):
-            # Each SSE data line, double-newline to flush
-            yield f"data: {chunk}\n\n"
+            if not chunk:
+                continue
+            payload = chunk.replace("\\", "\\\\").replace("\n", "\\n")
+            yield f"data: {payload}\n\n"
         yield "data: [DONE]\n\n"
     except Exception as e:
-        yield f"event: error\ndata: {str(e)}\n\n"
+        detail = str(e).replace("\\", "\\\\").replace("\n", "\\n")
+        yield f"event: error\ndata: {detail}\n\n"
 
 
 @app.post("/chat/stream")

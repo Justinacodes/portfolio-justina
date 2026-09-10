@@ -4,6 +4,11 @@ import os
 
 _groq = Groq(api_key=os.environ["GROQ_API_KEY"])
 
+# Groq retires models periodically (llama-3.3-70b-versatile returned 404
+# model_not_found), so keep this overridable without touching code.
+# Check availability with: GET https://api.groq.com/openai/v1/models
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
+
 # (doc_id, text) pairs loaded once at startup
 _docs: list[tuple[str, str]] = []
 
@@ -62,7 +67,7 @@ def _build_messages(query: str) -> list[dict]:
 
 def chat(query: str) -> str:
     response = _groq.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model=GROQ_MODEL,
         messages=_build_messages(query),
         max_tokens=512,
     )
@@ -72,7 +77,7 @@ def chat(query: str) -> str:
 def chat_stream(query: str):
     """Generator that yields text chunks as they arrive from Groq."""
     stream = _groq.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model=GROQ_MODEL,
         messages=_build_messages(query),
         max_tokens=512,
         stream=True,
