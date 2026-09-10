@@ -31,17 +31,19 @@ const Hero: React.FC = () => {
         />
       </div>
 
-      {/* Mobile / tablet: full-bleed portrait */}
+      {/* Mobile / tablet: portrait fills the full viewport width.
+          `!w-full !max-w-none` overrides the global `img{max-width:100%}` +
+          intrinsic width attribute, which otherwise let the image sit inset
+          with visible backdrop bands down each side. Centred horizontally so
+          the subject is not pushed off to one edge. */}
       <div className="absolute inset-0 lg:hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/justy.jpeg"
           alt="Justina Ominisan"
-          width={719}
-          height={1080}
           fetchPriority="high"
           decoding="async"
-          className="h-full w-full object-cover object-[58%_18%] sm:object-[62%_14%]"
+          className="absolute inset-0 !h-full !w-full !max-w-none object-cover object-[center_15%]"
         />
       </div>
 
@@ -103,7 +105,7 @@ const Hero: React.FC = () => {
           style={{ animationDelay: '360ms' }}
         >
           I build web applications and AI-powered products — dashboards, RAG systems
-          and real-time LLM interfaces. AWS Certified AI Practitioner, based in Nigeria.
+          and real-time LLM interfaces. AWS Certified.
         </p>
 
         <div
