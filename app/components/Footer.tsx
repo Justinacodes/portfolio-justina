@@ -1,5 +1,6 @@
 // components/Footer.tsx
 import React from 'react';
+import Link from 'next/link';
 import { socials } from '../data/content';
 
 const Footer: React.FC = () => {
@@ -9,6 +10,12 @@ const Footer: React.FC = () => {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="meta">&copy; 2026 Justina Ominisan</p>
           <div className="flex items-center gap-5">
+            <Link
+              href="/blog"
+              className="text-[0.8125rem] text-subtle transition-colors hover:text-fg"
+            >
+              Blog
+            </Link>
             <a
               href={socials.linkedin}
               target="_blank"

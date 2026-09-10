@@ -8,7 +8,6 @@ const links = [
   { href: '#work', label: 'Work' },
   { href: '#stack', label: 'Stack' },
   { href: '#about', label: 'About' },
-  { href: '/blog', label: 'Blog' },
 ];
 
 const Header: React.FC = () => {

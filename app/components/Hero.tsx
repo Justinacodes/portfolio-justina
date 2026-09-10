@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
           alt="Justina Ominisan"
           fetchPriority="high"
           decoding="async"
-          className="absolute inset-0 !h-full !w-full !max-w-none object-cover object-[center_15%]"
+          className="absolute inset-0 !h-full !w-full !max-w-none object-cover object-[center_top]"
         />
       </div>
 
@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to top, rgba(12,11,10,0.88) 0%, rgba(12,11,10,0.6) 22%, rgba(12,11,10,0.16) 48%, rgba(12,11,10,0.04) 70%, rgba(12,11,10,0.24) 100%)',
+            'linear-gradient(to top, rgb(12,11,10) 0%, rgba(12,11,10,0.97) 26%, rgba(12,11,10,0.82) 40%, rgba(12,11,10,0.4) 55%, rgba(12,11,10,0.1) 70%, rgba(12,11,10,0.28) 100%)',
         }}
       />
       <div
@@ -87,8 +87,8 @@ const Hero: React.FC = () => {
         }}
       />
 
-      <div className="shell relative w-full pb-20 pt-32 sm:pb-24">
-        <h1 className="max-w-[15ch] font-display text-display-xl font-bold lg:max-w-[13ch]">
+      <div className="shell relative w-full pb-14 pt-32 sm:pb-24">
+        <h1 className="max-w-[16ch] font-display text-display-lg font-bold sm:text-display-xl lg:max-w-[13ch]">
           <span className="fade-up block text-white" style={{ animationDelay: '100ms' }}>
             Justina Ominisan.
           </span>

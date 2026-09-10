@@ -20,7 +20,7 @@ const Stack: React.FC = () => {
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-x-10 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:mt-16 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-3">
           {stack.map((group, i) => (
             <Reveal key={group.group} delay={i * 60}>
               <p className="meta border-b border-line pb-3 text-fg">{group.group}</p>

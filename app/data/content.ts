@@ -541,10 +541,6 @@ export const stack: { group: string; items: string[] }[] = [
     group: 'Cloud',
     items: ['AWS', 'AWS Amplify', 'CloudFront', 'Vercel', 'Render'],
   },
-  {
-    group: 'Testing',
-    items: ['End-to-end testing', 'Automated QA', 'Critical workflow testing'],
-  },
 ]
 
 /**
