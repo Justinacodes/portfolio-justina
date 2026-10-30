@@ -2,7 +2,13 @@ import { NextResponse } from "next/server"
 
 export const dynamic = "force-dynamic"
 
-const PYTHON_API_URL = process.env.PYTHON_API_URL ?? "http://127.0.0.1:8000"
+// Normalise the base URL: a trailing slash ("…onrender.com/") produced
+// "//chat/stream", and a value that already includes the route produced
+// "/chat/stream/chat/stream". Both hit FastAPI as 404 {"detail":"Not Found"}.
+const PYTHON_API_URL = (process.env.PYTHON_API_URL ?? "http://127.0.0.1:8000")
+  .trim()
+  .replace(/\/+$/, "")
+  .replace(/\/chat(\/stream)?$/, "")
 const MAX_RETRIES = 6
 const RETRY_DELAY_MS = 1500
 
@@ -47,8 +53,12 @@ export async function POST(req: Request) {
 
     if (!response.ok) {
       const err = await response.text()
-      console.error("[chat] Python server error:", response.status, err)
-      return NextResponse.json({ error: err }, { status: response.status })
+      console.error("[chat] Python server error:", response.status, PYTHON_API_URL, err)
+      // Keep upstream details in the logs; visitors get a readable message.
+      return NextResponse.json(
+        { error: "The assistant is having trouble right now. Please try again later." },
+        { status: 502 }
+      )
     }
 
     // Pipe the SSE stream directly to the client

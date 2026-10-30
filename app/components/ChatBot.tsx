@@ -144,6 +144,7 @@ export default function ChatBot() {
       }
 
       let buffer = ""
+      let eventType = "message"
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
@@ -158,8 +159,32 @@ export default function ChatBot() {
           // Strip only CRLF framing — trimming here would eat the token's own
           // leading/trailing spaces and run words together.
           const line = rawLine.endsWith("\r") ? rawLine.slice(0, -1) : rawLine
+          if (line === "") {
+            eventType = "message"
+            continue
+          }
+          if (line.startsWith("event: ")) {
+            eventType = line.slice(7)
+            continue
+          }
           if (!line.startsWith("data: ")) continue
           const raw = line.slice(6)
+          if (eventType === "error") {
+            // Server-side failure mid-stream: don't print the raw exception
+            // as if it were the answer.
+            console.error("[chat] stream error:", raw)
+            setMessages((prev) => {
+              const updated = [...prev]
+              updated[assistantIndex] = {
+                role: "assistant",
+                content:
+                  updated[assistantIndex].content ||
+                  "Sorry, I couldn't answer that right now. Please try again.",
+              }
+              return updated
+            })
+            continue
+          }
           if (raw === "[DONE]" || raw === "") continue
           // The server escapes newlines (a bare newline is the SSE record
           // separator and would be dropped); decode them back here.
