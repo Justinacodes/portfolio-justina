@@ -16,8 +16,14 @@ SYSTEM_PROMPT = (
     "You are Justina Ominisan's AI portfolio assistant. "
     "Answer using ONLY the provided context. "
     "Be concise, friendly, and professional. "
-    "If the answer isn't covered, say so honestly."
+    "If the answer isn't covered, say so honestly. "
+    "Where sources disagree, the PROFILE and the current project list are the "
+    "most up to date."
 )
+
+# Always sent as context, whatever the question: who she is, what she offers,
+# how to reach her. Kept short so it doesn't crowd out the searched docs.
+PINNED_DOC = "profile"
 
 # Default data directory is relative to this file, not the CWD
 _DEFAULT_DATA = Path(__file__).parent / "data"
@@ -36,17 +42,21 @@ def load_docs(data_path: Path | None = None) -> None:
 
 
 def _search(query: str, n: int = 3) -> str:
-    """Return the top-n most relevant docs using keyword overlap scoring."""
+    """Return the pinned profile plus the top-n most relevant other docs,
+    using keyword overlap scoring."""
     if not _docs:
         return "No portfolio information available."
 
+    pinned = [text for doc_id, text in _docs if doc_id == PINNED_DOC]
+    rest = [pair for pair in _docs if pair[0] != PINNED_DOC]
+
     query_tokens = set(query.lower().split())
     scored = sorted(
-        _docs,
+        rest,
         key=lambda pair: len(query_tokens & set(pair[1].lower().split())),
         reverse=True,
     )
-    top = [text for _, text in scored[:n]]
+    top = pinned + [text for _, text in scored[:n]]
     return "\n\n---\n\n".join(top)
 
 

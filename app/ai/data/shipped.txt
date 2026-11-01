@@ -1,0 +1,43 @@
+PROJECTS ON JUSTINA'S PORTFOLIO (shipped and live — current list from her Work page)
+
+Datamellon — Company landing page
+Stack: React, Vite, Tailwind CSS. Live: https://www.datamellon.com
+The public site for Datamellon, an AWS Advanced Partner building enterprise AI, cloud and financial-services solutions. Justina built this landing page.
+
+MellyGuard — Product landing page
+Stack: Next.js, React. Live: https://mellyguard.ai
+The landing page for MellyGuard, a financial crime platform unifying KYC, fraud, AML, sanctions screening, investigations, regulatory reporting, audit, governance and AI operations. Justina built the landing page, and she also works on the platform itself, including AI Studio (see her Datamellon experience).
+
+Allwecure — Pharmaceutical marketplace
+Stack: Next.js, TypeScript, Tailwind CSS. Live: https://allwecure.com
+A procurement network connecting licensed healthcare providers with verified pharmaceutical suppliers. Justina was Lead Front-end Developer, leading a team of 3 and building the buyer, seller and business developer dashboards with role-based access control.
+
+Stuvo — Gamified exam prep
+Stack: Next.js, TypeScript, Tailwind CSS. Live: https://stuvo.io
+Study modes that let students learn smarter and compete with friends.
+
+Boardseats — Board recruitment platform
+Live: https://boardseats.io
+A platform connecting leading organisations with pre-verified, board-ready candidates. Justina contributed to the organisations side of the platform.
+
+Justina's portfolio (this site) — Personal project
+Stack: Next.js, TypeScript, Tailwind CSS, FastAPI. Live: https://www.justinaominisan.com.ng — Source: https://github.com/Justinacodes/portfolio-justina
+Her portfolio, with this AI assistant answering questions about her work, streamed from a FastAPI and Groq backend.
+
+Emmaplus — Online storefront
+Stack: WordPress, WooCommerce, Paystack. Live: https://emmaplus.com.ng
+Shopping cart with filtering, wishlist and checkout on WooCommerce.
+
+AI Job Tracker — AI assistant for the job hunt
+Stack: Next.js, TypeScript, Appwrite. Live: https://jobtrackerapp-nu.vercel.app
+Track applications, analyse resumes, generate cover letters and prepare for interviews in one place.
+
+Highklazz — Menswear store
+Stack: WordPress, Elementor, Paystack. Live: https://highklazz.com.ng
+Cart and checkout, payment integration, live chat and authentication for a clothing and accessory store.
+
+Revocube — Media agency website
+Stack: HTML, CSS, JavaScript. Live: https://revocube.vercel.app
+Built from the ground up with JavaScript toggle effects, CSS animations and an image slider.
+
+Her Datamellon case studies (compliance platform and AI Studio, banking AI journey-map generator, analytics dashboards, RAG and LLM streaming platform) are described in her experience and on the Work page.

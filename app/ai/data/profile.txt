@@ -1,0 +1,39 @@
+JUSTINA OMINISAN — PROFILE (current, matches her portfolio site)
+
+WHO SHE IS
+Justina Ominisan is a software engineer: frontend-focused, with a growing focus on AI and intelligent systems.
+Her headline: "I build software that solves real problems."
+In her words: "I'm Justina Ominisan, a software engineer. I build polished interfaces, websites, online stores and business applications, as well as AI-powered products that people can actually use."
+She has an eye for detail and enjoys taking an idea, understanding the problem behind it, and turning it into something functional, polished and genuinely useful.
+
+HIGHLIGHTS
+- 4 years shipping production frontends.
+- Live projects: websites, online stores, apps and AI products (see the Work page).
+- AWS Certified AI Practitioner.
+- Core stack: React, Next.js, TypeScript, Tailwind CSS; plus Python/FastAPI and AWS Bedrock for AI work.
+
+HER STORY (the path so far)
+She started at Revocube, where she got her first hands-on experience building for the web, turning what she was learning into real interfaces.
+At ISSL (Integrated Software Services Limited), she grew as a frontend developer, working on real-world projects and learning how software gets built inside a team.
+Alongside that, she took on freelance work: websites, online stores and business applications for clients of her own.
+That led her to Datamellon, where she works on production software across business applications and dashboards, from frontend architecture and authentication to testing and improving products without breaking the systems behind them.
+Then she got curious about what happens beyond the interface. That took her into AI engineering: APIs, retrieval-augmented generation, vector databases and cloud AI services, and making AI part of products that solve real business problems, not just demos.
+In her words: "The interface is still where I start. It's just not where I stop anymore."
+
+WHAT SHE CAN BUILD FOR YOU
+For businesses and non-technical clients: websites, online stores (including payments such as Paystack) and business applications.
+For companies and teams: frontend engineering (React, Next.js, TypeScript, Tailwind CSS), dashboards, API integrations, authentication and role-based experiences, E2E testing, and AI-powered products (RAG, LLM streaming, AWS Bedrock).
+
+HOW TO HIRE OR CONTACT HER
+Use the contact form on her site (the "Need a website?" and "Say hi" buttons lead there), email justinaominisan@gmail.com, or call +234 705 863 5593. Her resume can be downloaded from the About section. LinkedIn and GitHub (github.com/justinacodes) are linked in the footer.
+Pricing, rates and availability are not published: suggest getting in touch through the contact form or email to discuss a project.
+
+BEYOND THE CODE
+Outside the code, she's into music, books, fashion, and keeping up with new tech trends. She's also constantly learning, whether that means picking up a new technology or exploring an unfamiliar idea.
+
+HER SITE
+- Home (justinaominisan.com.ng): intro, featured projects, Datamellon experience, stack, about teaser, contact form.
+- Work page (/work): every shipped project, plus case studies from her work at Datamellon (/work/<case-study>).
+- About page (/about): her story, highlights and interests.
+- Blog (/blog).
+This chat assistant is itself one of her projects: a Next.js frontend streaming answers from a Python FastAPI backend that calls an LLM through Groq.
