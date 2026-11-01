@@ -6,13 +6,17 @@
   :root {
     --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
 
-    /* Light theme (default) */
-    --canvas: 255 255 255;
-    --surface: 248 247 245;
-    --fg: 20 18 17;
-    --subtle: 116 111 106;
-    --line: 228 224 219;
-    --accent: 181 77 4;
+    /* Light theme (default) — warm paper and espresso, taking its cue from
+       the caramel tones of the hero photo rather than a flat white page. */
+    --canvas: 247 241 232;
+    --surface: 239 229 214;
+    --fg: 33 24 18;
+    --subtle: 112 95 81;
+    --line: 224 209 190;
+    --accent: 166 82 22;
+    /* Soft decorative glow behind sections */
+    --glow: 222 150 82;
+    --grain-opacity: 0.5;
   }
 
   .dark {
@@ -23,6 +27,8 @@
     --subtle: 156 149 142;
     --line: 42 39 37;
     --accent: 232 150 74;
+    --glow: 190 105 40;
+    --grain-opacity: 0.25;
   }
 
   html {
@@ -124,6 +130,118 @@
   }
 }
 
+/* Paper grain over the whole page. A fixed overlay rather than a body
+   background, because every section paints its own bg-canvas. Sits under the
+   nav, chat and splash. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Streamed accent word (components/StreamText.tsx): characters appear one at
+   a time once the enclosing Reveal is visible, then the caret blinks a few
+   times and goes out, like an LLM reply finishing. */
+.stream-char {
+  opacity: 0;
+}
+
+.is-visible .stream-char {
+  animation: stream-in 0.01s linear forwards;
+  animation-delay: calc(250ms + var(--i) * 55ms);
+}
+
+.stream-caret {
+  display: inline-block;
+  width: 0.07em;
+  height: 0.78em;
+  margin-left: 0.06em;
+  vertical-align: -0.04em;
+  background: currentColor;
+  opacity: 0;
+}
+
+.is-visible .stream-caret {
+  animation: caret-blink 0.9s steps(1) 4 forwards;
+  animation-delay: 150ms;
+}
+
+@keyframes stream-in {
+  to { opacity: 1; }
+}
+
+@keyframes caret-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Loading screen (markup in app/layout.tsx). Always dark, in both themes,
+   so it hands off to the dark hero without a light flash in between. */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  background: #0e0d0c;
+  color: #fff;
+  transition: opacity 0.6s var(--ease-editorial), visibility 0s linear 0.6s;
+}
+
+.splash-done .splash {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-mark {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  animation: splash-rise 0.8s var(--ease-editorial) both;
+}
+
+.splash-dot {
+  color: rgb(232 150 74);
+}
+
+.splash-bar {
+  position: relative;
+  width: 7rem;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.12);
+}
+
+.splash-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: inherit;
+  background: rgb(232 150 74);
+  animation: splash-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes splash-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes splash-slide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(250%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -146,5 +264,14 @@
   .fade-up {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Show the accent word whole; no typing, no caret */
+  .stream-char {
+    opacity: 1 !important;
+  }
+
+  .stream-caret {
+    display: none;
   }
 }

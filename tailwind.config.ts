@@ -28,8 +28,9 @@ const config: Config = {
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'],
         display: ['var(--font-display)', 'var(--font-roboto)', 'sans-serif'],
-        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
-      },
+        // Editorial accent: one italic word per heading, never body copy.
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],      },
       colors: {
         // Theme-aware tokens driven by CSS variables, so light/dark swap
         // without duplicating utilities on every element.
@@ -39,7 +40,7 @@ const config: Config = {
         subtle: 'rgb(var(--subtle) / <alpha-value>)',
         line: 'rgb(var(--line) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
-
+        glow: 'rgb(var(--glow) / <alpha-value>)',
         // Fixed brand values retained (ChatBot + dark hero overlay)
         ink: '#14110F',
         cream: '#F4EFE6',

@@ -1,32 +1,38 @@
 // components/Stack.tsx
 import React from 'react';
 import Reveal from './Reveal';
+import SectionHeading, { Glow } from './SectionHeading';
 import { stack, certifications } from '../data/content';
 
-/**
- * Tech stack as grouped columns rather than a logo wall, with certifications
- * sharing the same grid rhythm.
- */
+/** The stack as chip cards, with certifications set apart in a dark card. */
 const Stack: React.FC = () => {
   return (
-    <section id="stack" className="scroll-mt-24 border-t border-line bg-canvas">
-      <div className="shell py-section">
-        <Reveal>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="font-display text-display-lg font-bold text-fg">Stack</h2>
-            <p className="max-w-measure text-[0.9375rem] leading-relaxed text-subtle sm:text-right">
-              What I build with, from the interface down to the services behind it.
-            </p>
-          </div>
-        </Reveal>
+    <section id="stack" className="relative scroll-mt-24 overflow-hidden bg-canvas">
+      <Glow className="-left-40 top-1/3 h-[32rem] w-[32rem]" />
 
-        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:mt-16 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-3">
+      <div className="shell relative z-10 py-section">
+        <SectionHeading
+          index="03"
+          label="Stack"
+          title="What I"
+          accent="build with"
+          caption="From the interface down to the services behind it."
+        />
+
+        <div className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
           {stack.map((group, i) => (
-            <Reveal key={group.group} delay={i * 60}>
-              <p className="meta border-b border-line pb-3 text-fg">{group.group}</p>
-              <ul className="mt-4 space-y-2">
+            <Reveal
+              key={group.group}
+              delay={i * 60}
+              className="rounded-3xl border border-line bg-surface/60 p-6 backdrop-blur-sm sm:p-7"
+            >
+              <p className="meta text-fg">{group.group}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
-                  <li key={item} className="text-[0.9375rem] text-subtle">
+                  <li
+                    key={item}
+                    className="rounded-full border border-line bg-canvas px-3.5 py-1.5 text-[0.875rem] text-fg transition-colors duration-300 hover:border-accent hover:text-accent"
+                  >
                     {item}
                   </li>
                 ))}
@@ -34,19 +40,27 @@ const Stack: React.FC = () => {
             </Reveal>
           ))}
 
-          <Reveal delay={stack.length * 60}>
-            <p className="meta border-b border-line pb-3 text-fg">Certifications</p>
-            <ul className="mt-4 space-y-3">
+          <Reveal
+            delay={stack.length * 60}
+            className="relative isolate overflow-hidden rounded-3xl bg-[#211812] p-6 text-[#F7F1E8] sm:col-span-2 sm:p-7 lg:col-span-2"
+          >
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#DE9652]/30 blur-3xl" />
+            </div>
+            <p className="meta relative text-[#F7F1E8]/60">Certifications</p>
+            <ul className="relative mt-5 grid gap-x-8 gap-y-5 sm:grid-cols-2">
               {certifications.map((cert, i) => (
-                <li key={cert.name}>
-                  <p
-                    className={`text-[0.9375rem] ${
-                      i === 0 ? 'font-medium text-fg' : 'text-subtle'
-                    }`}
-                  >
-                    {cert.name}
-                  </p>
-                  <p className="mt-0.5 text-[0.8125rem] text-subtle/70">{cert.issuer}</p>
+                <li key={cert.name} className="flex items-start gap-3">
+                  <span
+                    aria-hidden="true"
+                    className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${i === 0 ? 'bg-[#E8964A]' : 'bg-[#F7F1E8]/30'}`}
+                  />
+                  <div>
+                    <p className={i === 0 ? 'font-display text-lg font-bold' : 'text-[0.9375rem]'}>
+                      {cert.name}
+                    </p>
+                    <p className="mt-0.5 text-[0.8125rem] text-[#F7F1E8]/55">{cert.issuer}</p>
+                  </div>
                 </li>
               ))}
             </ul>

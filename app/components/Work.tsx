@@ -2,80 +2,65 @@
 import React from 'react';
 import Link from 'next/link';
 import Reveal from './Reveal';
+import SectionHeading, { Glow } from './SectionHeading';
 import { work, projects, type Project } from '../data/content';
 
 /**
- * Card anatomy mirrors the reference: a large visual, then a meta row
- * (client · tags / period), a big title, and one short blurb.
+ * Two parts. Shipped projects lead: they have screenshots, so the section
+ * opens visually. Card anatomy mirrors the reference: a large visual, then a
+ * meta row (client · tags / period), a big title, and one short blurb.
  *
- * Work entries link to their case-study page at /work/[slug] (opened in a new
- * tab); personal projects link straight to the live site. The Datamellon work
- * has no screenshots, so those cards get a typographic panel rather than a
- * fabricated image.
+ * The Datamellon work follows as compact rows. It has no screenshots, and as
+ * full cards it rendered as large empty panels; a row keeps the substance
+ * (title, blurb, stack) and links to the case study at /work/[slug].
  */
-const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean }> = ({
-  project,
-  priority,
-  caseStudy = false,
-}) => {
-  const href = caseStudy ? `/work/${project.id}` : project.demoUrl;
-
-  const visual = (
-    <div className="relative aspect-[16/10] overflow-hidden bg-surface">
-      {project.image ? (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-          src={project.image}
-          alt={`${project.client} — ${project.title}`}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          width={1024}
-          height={640}
-          className="h-full w-full object-cover transition-transform duration-[900ms] ease-editorial group-hover:scale-[1.03]"
-        />
-      ) : (
-        /* Typographic panel for work without a screenshot: the stack carries
-           the card instead of a placeholder graphic. */
-        <div className="relative flex h-full w-full flex-col justify-between overflow-hidden bg-fg p-7 sm:p-9">
-          <div
-            aria-hidden="true"
-            className="absolute -right-16 -top-20 h-64 w-64 rounded-full opacity-20 blur-2xl"
-            style={{ background: 'rgb(var(--accent))' }}
-          />
-          <p className="relative font-mono text-meta uppercase text-canvas/50">
-            {project.client}
-          </p>
-          <ul className="relative flex min-w-0 flex-wrap gap-x-2 gap-y-2">
-            {(project.stack ?? []).map((t) => (
-              <li
-                key={t}
-                className="rounded-full border border-canvas/20 px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-wider text-canvas/70"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
+const Card: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
+  const priority = index < 2;
+  const href = project.demoUrl;
+  // Shown in the frame's address bar: the real live domain, so it reads as a
+  // working site rather than a mock-up.
+  const host = href ? new URL(href).hostname.replace(/^www\./, '') : project.client.toLowerCase();
 
   const body = (
     <>
-      {/* Meta row */}
-      <div className="mt-5 flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-        <p className="meta min-w-0 sm:truncate">
-          <span className="text-fg">{project.client}</span>
-          <span className="mx-2 text-subtle" aria-hidden="true">
-            &middot;
+      {/* Screenshot in a small browser window */}
+      <div className="overflow-hidden rounded-2xl bg-surface ring-1 ring-line transition-[transform,box-shadow] duration-500 ease-editorial group-hover:-translate-y-1 group-hover:shadow-[0_24px_48px_-24px_rgb(var(--fg)/0.35)]">
+        <div aria-hidden="true" className="flex items-center gap-3 border-b border-line px-3.5 py-2.5">
+          <span className="flex gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-fg/15 transition-colors duration-300 group-hover:bg-[#E5715F]" />
+            <span className="h-2 w-2 rounded-full bg-fg/15 transition-colors delay-75 duration-300 group-hover:bg-[#E8B04A]" />
+            <span className="h-2 w-2 rounded-full bg-fg/15 transition-colors delay-150 duration-300 group-hover:bg-[#6FBF73]" />
           </span>
-          {project.tags}
-        </p>
-        <p className="meta shrink-0">{project.period}</p>
+          <span className="min-w-0 flex-1 truncate rounded-full bg-canvas/80 px-3 py-1 text-center font-mono text-[0.625rem] text-subtle">
+            {host}
+          </span>
+          <span className="w-[1.875rem]" />
+        </div>
+        <div className="relative aspect-[16/10] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.image}
+            alt={`${project.client} — ${project.title}`}
+            loading={priority ? 'eager' : 'lazy'}
+            decoding="async"
+            width={1024}
+            height={640}
+            className="h-full w-full object-cover transition-transform duration-[900ms] ease-editorial group-hover:scale-[1.03]"
+          />
+        </div>
       </div>
 
+      {/* Meta row */}
+      <p className="meta mt-4 min-w-0">
+        <span className="text-fg">{project.client}</span>
+        <span className="mx-2 text-subtle" aria-hidden="true">
+          &middot;
+        </span>
+        {project.tags}
+      </p>
+
       {/* Title */}
-      <h3 className="mt-3 break-words font-display text-display-md font-bold text-fg">
+      <h3 className="mt-2 break-words font-display text-xl font-bold leading-snug text-fg sm:text-2xl">
         {project.title}
         {href && (
           <span
@@ -88,36 +73,23 @@ const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean
       </h3>
 
       {/* Blurb */}
-      <p className="mt-2.5 max-w-[46ch] text-[0.9375rem] leading-relaxed text-subtle">
+      <p className="mt-2 text-[0.875rem] leading-relaxed text-subtle">
         {project.blurb}
       </p>
-
-      {caseStudy && (
-        <p className="mt-4 text-[0.8125rem] text-accent">Read the case study</p>
-      )}
     </>
   );
 
   return (
     <Reveal as="li" className="group min-w-0">
-      {caseStudy ? (
-        <Link href={href!} target="_blank" rel="noopener noreferrer" className="block">
-          {visual}
-          {body}
-        </Link>
-      ) : href ? (
+      {href ? (
         <a href={href} target="_blank" rel="noopener noreferrer" className="block">
-          {visual}
           {body}
         </a>
       ) : (
-        <div className="block">
-          {visual}
-          {body}
-        </div>
+        <div className="block">{body}</div>
       )}
 
-      {!caseStudy && project.githubUrl && (
+      {project.githubUrl && (
         <a
           href={project.githubUrl}
           target="_blank"
@@ -131,44 +103,91 @@ const Card: React.FC<{ project: Project; priority?: boolean; caseStudy?: boolean
   );
 };
 
+/** One Datamellon case study as a row: product and tags, title and blurb, stack. */
+const CaseStudyRow: React.FC<{ project: Project; index: number }> = ({ project, index }) => (
+  <Reveal as="li" className="group min-w-0 border-t border-line last:border-b">
+    <Link
+      href={`/work/${project.id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="-mx-4 grid grid-cols-[minmax(0,1fr)] gap-4 rounded-2xl px-4 py-8 transition-colors duration-500 ease-editorial hover:bg-surface/70 sm:-mx-6 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,17rem)] lg:gap-10"
+    >
+      <div className="flex flex-col gap-2">
+        <span
+          aria-hidden="true"
+          className="mb-2 font-serif text-5xl italic leading-none text-accent/80 transition-colors duration-300 group-hover:text-accent"
+        >
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <p className="meta text-fg">{project.client}</p>
+        <p className="meta">{project.tags}</p>
+      </div>
+
+      <div className="min-w-0">
+        <h3 className="break-words font-display text-display-md font-bold text-fg transition-colors duration-300 group-hover:text-accent">
+          {project.title}
+          <span
+            aria-hidden="true"
+            className="ml-2 inline-block text-subtle transition-transform duration-300 ease-editorial group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+          >
+            &#8599;
+          </span>
+        </h3>
+        <p className="mt-2.5 max-w-[58ch] text-[0.9375rem] leading-relaxed text-subtle">
+          {project.blurb}
+        </p>
+        <p className="mt-4 text-[0.8125rem] text-accent">Read the case study</p>
+      </div>
+
+      <ul className="flex min-w-0 flex-wrap content-start gap-2">
+        {(project.stack ?? []).map((t) => (
+          <li
+            key={t}
+            className="rounded-full border border-line bg-canvas/60 px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-wider text-subtle"
+          >
+            {t}
+          </li>
+        ))}
+      </ul>
+    </Link>
+  </Reveal>
+);
+
 const Work: React.FC = () => {
   return (
-    <section id="work" className="scroll-mt-24 bg-canvas">
-      <div className="shell py-section">
-        {/* Selected work */}
-        <Reveal>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="font-display text-display-lg font-bold text-fg">
-              Selected work
-            </h2>
-            <p className="max-w-measure text-[0.9375rem] leading-relaxed text-subtle sm:text-right">
-              Production frontends and AI systems built at Datamellon. Open any project
-              for the full case study.
-            </p>
-          </div>
-        </Reveal>
+    <section id="work" className="relative scroll-mt-24 overflow-hidden bg-canvas">
+      <Glow className="-right-40 top-24 h-[34rem] w-[34rem]" />
+      <Glow className="-left-48 top-[55%] h-[30rem] w-[30rem]" />
+      <div className="shell relative z-10 py-section">
+        {/* Shipped projects */}
+        <SectionHeading
+          index="01"
+          label="Work"
+          title="Things I've"
+          accent="shipped"
+          caption="Client builds and personal projects. All live."
+        />
 
-        <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-10 gap-y-14 sm:mt-16 sm:gap-y-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          {work.map((p, i) => (
-            <Card key={p.id} project={p} priority={i < 2} caseStudy />
+        <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">
+          {projects.map((p, i) => (
+            <Card key={p.id} project={p} index={i} />
           ))}
         </ul>
 
-        {/* Projects */}
-        <Reveal className="mt-28 sm:mt-36">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="font-display text-display-lg font-bold text-fg">
-              Things I&apos;ve shipped
-            </h2>
-            <p className="max-w-measure text-[0.9375rem] leading-relaxed text-subtle sm:text-right">
-              Client builds and personal projects. All live.
-            </p>
-          </div>
-        </Reveal>
+        {/* Datamellon experience */}
+        <div className="mt-28 sm:mt-36">
+          <SectionHeading
+            index="02"
+            label="Experience"
+            title="Building at"
+            accent="Datamellon"
+            caption="Production frontends and AI systems. Open any project for the full case study."
+          />
+        </div>
 
-        <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-10 gap-y-14 sm:mt-16 sm:gap-y-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          {projects.map((p) => (
-            <Card key={p.id} project={p} />
+        <ul className="mt-10 sm:mt-14">
+          {work.map((p, i) => (
+            <CaseStudyRow key={p.id} project={p} index={i} />
           ))}
         </ul>
       </div>

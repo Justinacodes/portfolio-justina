@@ -95,16 +95,10 @@ const Header: React.FC = () => {
         >
           <a
             href={resolve('#home')}
-            className={`group flex shrink-0 items-center gap-2 whitespace-nowrap font-display text-base font-bold tracking-tight transition-colors duration-500 ${
+            className={`group flex shrink-0 items-center whitespace-nowrap font-display text-base font-bold tracking-tight transition-colors duration-500 ${
               solid && !onHeroDark ? 'text-fg' : 'text-white'
             }`}
           >
-            <span
-              aria-hidden="true"
-              className="text-accent transition-transform duration-500 ease-editorial group-hover:rotate-90"
-            >
-              &#10022;
-            </span>
             Justina<span className="text-accent">.</span>
           </a>
 

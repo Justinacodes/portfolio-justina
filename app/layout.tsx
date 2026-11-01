@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Roboto, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Roboto, Space_Grotesk, JetBrains_Mono, Instrument_Serif } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
@@ -25,6 +25,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+const instrumentSerif = Instrument_Serif({
+  weight: '400',
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+})
 const TITLE = "Justina Ominisan - Frontend Engineer / AI Engineer"
 const DESCRIPTION =
   "Frontend Engineer and AI Engineer building modern web applications, AI-powered products and data-driven interfaces with React, Next.js, TypeScript and AWS."
@@ -95,7 +102,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   // Keep the light hero scrim readable against the browser UI in both themes.
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: light)', color: '#f7f1e8' },
     { media: '(prefers-color-scheme: dark)', color: '#0e0d0c' },
   ],
 }
@@ -160,8 +167,29 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${roboto.className} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+        className={`${roboto.className} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
       >
+        {/* Loading screen. Server-rendered so it paints with the first byte,
+            then faded out by the inline script once the page (fonts, hero
+            photo) has loaded. It is only hidden, never removed: React owns
+            this node, and pulling it out of the DOM would break hydration. */}
+        <div id="splash" className="splash" aria-hidden="true">
+          <p className="splash-mark font-display">
+            Justina<span className="splash-dot">.</span>
+          </p>
+          <span className="splash-bar" />
+        </div>
+        <script
+          dangerouslySetInnerHTML={{
+            // Wait for `load`, but keep it up at least 700ms from navigation
+            // start (no flash on cached loads) and never longer than 4s (a slow
+            // third-party request shouldn't hold the page hostage).
+            __html: `(function(){var d=document.documentElement,done=false;function hide(){if(done)return;done=true;setTimeout(function(){d.classList.add('splash-done')},Math.max(0,700-performance.now()))}if(document.readyState==='complete')hide();else window.addEventListener('load',hide);setTimeout(hide,4000)})();`,
+          }}
+        />
+        <noscript>
+          <style>{`.splash{display:none}`}</style>
+        </noscript>
         {children}
         <Analytics />
       </body>

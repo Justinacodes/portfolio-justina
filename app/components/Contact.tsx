@@ -1,6 +1,13 @@
 "use client"
 import React, { useState } from 'react';
 import { socials } from '../data/content';
+import StreamText from './StreamText';
+import Reveal from './Reveal';
+
+// The block is warm espresso in both themes, so these are fixed colours
+// rather than theme tokens.
+const CREAM = 'text-[#F7F1E8]';
+const MUTED = 'text-[#F7F1E8]/65';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -67,17 +74,33 @@ const Contact: React.FC = () => {
   };
 
   const fieldClass =
-    'w-full rounded-xl border border-line bg-surface px-4 py-3 text-fg placeholder-subtle/70 transition-colors duration-300 focus:border-accent focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50';
+    'w-full rounded-xl border border-[#F7F1E8]/15 bg-[#F7F1E8]/[0.06] px-4 py-3 text-[#F7F1E8] placeholder-[#F7F1E8]/40 transition-colors duration-300 focus:border-[#E8964A] focus:bg-[#F7F1E8]/10 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50';
+  const labelClass = 'font-mono text-meta uppercase text-[#F7F1E8]/55';
 
   return (
-    <section id="contact" className="scroll-mt-24 border-t border-line bg-canvas">
-      <div className="shell py-section">
+    <section id="contact" className="scroll-mt-24 bg-canvas">
+      <div className="shell pb-section">
+        <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#211812] px-6 py-14 dark:bg-[#2A1F18] dark:ring-1 dark:ring-[#F7F1E8]/10 sm:rounded-[2.5rem] sm:px-12 sm:py-20 lg:px-16">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute -left-24 -top-32 h-[28rem] w-[28rem] rounded-full bg-[#DE9652]/35 blur-[100px]" />
+            <div className="absolute -bottom-40 right-0 h-[26rem] w-[26rem] rounded-full bg-[#A65216]/40 blur-[110px]" />
+          </div>
         <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <h2 className="font-display text-display-lg font-bold text-fg">
-              Let&apos;s build something useful.
+            <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-[#E8964A]">
+              <span>05</span>
+              <span aria-hidden="true" className="h-px w-8 bg-[#E8964A]/50" />
+              <span className="text-[#F7F1E8]/55">Contact</span>
+            </p>
+            <Reveal>
+            <h2 className={`mt-5 font-display text-display-lg font-bold ${CREAM}`}>
+              Let&apos;s build something{' '}
+              <em className="font-serif text-[1.12em] font-normal italic tracking-normal text-[#E8964A]">
+                <StreamText text="useful." />
+              </em>
             </h2>
-            <p className="mt-6 max-w-measure text-[0.9375rem] leading-relaxed text-subtle">
+            </Reveal>
+            <p className={`mt-6 max-w-measure text-[0.9375rem] leading-relaxed ${MUTED}`}>
               I am always interested in new opportunities and challenging projects.
               Whether you need a responsive website, a complex web application, or
               just want to discuss your ideas, I would love to hear from you.
@@ -87,7 +110,7 @@ const Contact: React.FC = () => {
               <li>
                 <a
                   href={`mailto:${socials.email}`}
-                  className="text-fg underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+                  className={`${CREAM} underline decoration-[#F7F1E8]/25 underline-offset-4 transition-colors hover:decoration-[#E8964A]`}
                 >
                   {socials.email}
                 </a>
@@ -95,7 +118,7 @@ const Contact: React.FC = () => {
               <li>
                 <a
                   href={`tel:${socials.phone}`}
-                  className="text-subtle transition-colors hover:text-fg"
+                  className={`${MUTED} transition-colors hover:text-[#F7F1E8]`}
                 >
                   {socials.phone}
                 </a>
@@ -105,7 +128,7 @@ const Contact: React.FC = () => {
                   href={socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-fg underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+                  className={`${CREAM} underline decoration-[#F7F1E8]/25 underline-offset-4 transition-colors hover:decoration-[#E8964A]`}
                 >
                   LinkedIn
                 </a>
@@ -113,7 +136,7 @@ const Contact: React.FC = () => {
                   href={socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-fg underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+                  className={`${CREAM} underline decoration-[#F7F1E8]/25 underline-offset-4 transition-colors hover:decoration-[#E8964A]`}
                 >
                   GitHub
                 </a>
@@ -130,8 +153,8 @@ const Contact: React.FC = () => {
                   aria-live="polite"
                   className={`mb-6 rounded-xl border px-4 py-3 text-sm leading-relaxed ${
                     submitStatus.type === 'success'
-                      ? 'border-accent/40 bg-accent/10 text-fg'
-                      : 'border-red-500/40 bg-red-500/10 text-red-500'
+                      ? 'border-[#E8964A]/40 bg-[#E8964A]/15 text-[#F7F1E8]'
+                      : 'border-red-400/40 bg-red-400/15 text-red-200'
                   }`}
                 >
                   {submitStatus.message}
@@ -140,7 +163,7 @@ const Contact: React.FC = () => {
 
               <div className="space-y-5">
                 <div>
-                  <label htmlFor="name" className="meta">
+                  <label htmlFor="name" className={labelClass}>
                     Name
                   </label>
                   <input
@@ -158,7 +181,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="meta">
+                  <label htmlFor="email" className={labelClass}>
                     Email
                   </label>
                   <input
@@ -176,7 +199,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="meta">
+                  <label htmlFor="message" className={labelClass}>
                     Message
                   </label>
                   <textarea
@@ -195,7 +218,7 @@ const Contact: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-fg px-8 py-3.5 text-sm font-medium text-canvas transition-opacity duration-300 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-10"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E8964A] px-8 py-3.5 text-sm font-semibold text-[#211812] transition-[transform,background-color] duration-300 ease-editorial hover:-translate-y-0.5 hover:bg-[#F0A862] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-10"
                 >
                   {isSubmitting ? (
                     <>
@@ -221,6 +244,7 @@ const Contact: React.FC = () => {
               </div>
             </form>
           </div>
+        </div>
         </div>
       </div>
     </section>
