@@ -7,7 +7,7 @@ import ThemeToggle from './ThemeToggle';
 const links = [
   { href: '#work', label: 'Work' },
   { href: '#stack', label: 'Stack' },
-  { href: '#about', label: 'About' },
+  { href: '/about', label: 'About' },
 ];
 
 const Header: React.FC = () => {
@@ -105,7 +105,14 @@ const Header: React.FC = () => {
           <nav aria-label="Primary" className="hidden md:block">
             <ul className="flex items-center gap-1">
               {links.map((link) => {
-                const isActive = active === link.href;
+                // Section links light up by scroll position; page links by route.
+                // Work also stays lit across /work and the case studies.
+                const isActive =
+                  link.href === '#work' && pathname.startsWith('/work')
+                    ? true
+                    : link.href.startsWith('#')
+                      ? active === link.href
+                      : pathname === link.href;
                 return (
                   <li key={link.href}>
                     <a

@@ -193,6 +193,22 @@ body::after {
   100% { opacity: 0; }
 }
 
+/* About page interest tiles: bouncing equalizer and a blinking "ai_" caret. */
+.eq > span {
+  height: 100%;
+  transform-origin: bottom;
+  animation: eq 1.1s ease-in-out infinite;
+}
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+
+.ai-caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
 /* Loading screen (markup in app/layout.tsx). Always dark, in both themes,
    so it hands off to the dark hero without a light flash in between. */
 .splash {

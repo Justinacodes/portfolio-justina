@@ -14,7 +14,11 @@ import { work, projects, type Project } from '../data/content';
  * full cards it rendered as large empty panels; a row keeps the substance
  * (title, blurb, stack) and links to the case study at /work/[slug].
  */
-const Card: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
+const Card: React.FC<{ project: Project; index: number; className?: string }> = ({
+  project,
+  index,
+  className = '',
+}) => {
   const priority = index < 2;
   const href = project.demoUrl;
   // Shown in the frame's address bar: the real live domain, so it reads as a
@@ -45,6 +49,7 @@ const Card: React.FC<{ project: Project; index: number }> = ({ project, index })
             decoding="async"
             width={1024}
             height={640}
+            style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
             className="h-full w-full object-cover transition-transform duration-[900ms] ease-editorial group-hover:scale-[1.03]"
           />
         </div>
@@ -80,7 +85,7 @@ const Card: React.FC<{ project: Project; index: number }> = ({ project, index })
   );
 
   return (
-    <Reveal as="li" className="group min-w-0">
+    <Reveal as="li" className={`group min-w-0 ${className}`}>
       {href ? (
         <a href={href} target="_blank" rel="noopener noreferrer" className="block">
           {body}
@@ -104,7 +109,7 @@ const Card: React.FC<{ project: Project; index: number }> = ({ project, index })
 };
 
 /** One Datamellon case study as a row: product and tags, title and blurb, stack. */
-const CaseStudyRow: React.FC<{ project: Project; index: number }> = ({ project, index }) => (
+export const CaseStudyRow: React.FC<{ project: Project; index: number }> = ({ project, index }) => (
   <Reveal as="li" className="group min-w-0 border-t border-line last:border-b">
     <Link
       href={`/work/${project.id}`}
@@ -153,6 +158,26 @@ const CaseStudyRow: React.FC<{ project: Project; index: number }> = ({ project, 
   </Reveal>
 );
 
+/** How many projects the home page shows before "See all projects". */
+const HOME_COUNT = 3;
+
+/**
+ * Grid of project cards. With `preview`, only the first few show; the third is
+ * hidden on two-column (tablet) widths so the row never ends with a gap.
+ */
+export const ProjectGrid: React.FC<{ items: Project[]; preview?: boolean }> = ({ items, preview }) => (
+  <ul className="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">
+    {(preview ? items.slice(0, HOME_COUNT) : items).map((p, i) => (
+      <Card
+        key={p.id}
+        project={p}
+        index={i}
+        className={preview && i === HOME_COUNT - 1 ? 'sm:hidden lg:block' : ''}
+      />
+    ))}
+  </ul>
+);
+
 const Work: React.FC = () => {
   return (
     <section id="work" className="relative scroll-mt-24 overflow-hidden bg-canvas">
@@ -168,11 +193,24 @@ const Work: React.FC = () => {
           caption="Client builds and personal projects. All live."
         />
 
-        <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">
-          {projects.map((p, i) => (
-            <Card key={p.id} project={p} index={i} />
-          ))}
-        </ul>
+        <div className="mt-12 sm:mt-16">
+          <ProjectGrid items={projects} preview />
+        </div>
+
+        <Reveal className="mt-12 flex justify-center sm:mt-16">
+          <Link
+            href="/work"
+            className="group inline-flex items-center gap-3 rounded-full border border-fg/15 bg-canvas/60 px-7 py-3.5 text-sm font-medium text-fg backdrop-blur-sm transition-colors duration-300 hover:border-fg hover:bg-fg hover:text-canvas"
+          >
+            See all {projects.length} projects
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 ease-editorial group-hover:translate-x-1"
+            >
+              &#8594;
+            </span>
+          </Link>
+        </Reveal>
 
         {/* Datamellon experience */}
         <div className="mt-28 sm:mt-36">

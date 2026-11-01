@@ -9,7 +9,8 @@ import Reveal from './Reveal';
 const CREAM = 'text-[#F7F1E8]';
 const MUTED = 'text-[#F7F1E8]/65';
 
-const Contact: React.FC = () => {
+/** `index` is the section number in the eyebrow; it differs per page. */
+const Contact: React.FC<{ index?: string }> = ({ index = '05' }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -88,7 +89,7 @@ const Contact: React.FC = () => {
         <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-[#E8964A]">
-              <span>05</span>
+              <span>{index}</span>
               <span aria-hidden="true" className="h-px w-8 bg-[#E8964A]/50" />
               <span className="text-[#F7F1E8]/55">Contact</span>
             </p>
