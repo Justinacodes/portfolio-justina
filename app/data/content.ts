@@ -24,6 +24,9 @@ export interface Project {
   blurb: string
   /** Screenshot path, when one exists */
   image?: string
+  /** CSS object-position for the screenshot when a centred crop loses the
+   *  important part (e.g. 'left' keeps a sidebar and logo in frame) */
+  imagePosition?: string
   demoUrl?: string
   githubUrl?: string
   /** Key technologies, shown on cards that have no screenshot */
@@ -410,6 +413,7 @@ export const projects: Project[] = [
     blurb:
       'A procurement network connecting licensed healthcare providers with verified pharmaceutical suppliers.',
     image: '/images/allwecure.png',
+    imagePosition: 'left',
     demoUrl: 'https://allwecure.com',
     githubUrl: 'https://github.com/Justinacodes',
     featured: true,
@@ -424,6 +428,28 @@ export const projects: Project[] = [
     image: '/images/stuvo.png',
     demoUrl: 'https://stuvo.io/',
     githubUrl: 'https://github.com/Justinacodes',
+  },
+  {
+    id: 'boardseats',
+    client: 'Boardseats',
+    tags: 'Frontend, Organisations portal',
+    period: 'Live',
+    title: 'Board recruitment platform',
+    blurb:
+      'Contributed to the organisations side of Boardseats, a platform connecting leading organisations with pre-verified, board-ready candidates.',
+    image: '/images/boardseats.png',
+    demoUrl: 'https://boardseats.io',
+  },
+  {
+    id: 'portfolio',
+    client: 'Personal',
+    tags: 'Next.js, TypeScript, Tailwind, FastAPI',
+    period: 'Live',
+    title: 'My portfolio',
+    blurb: "My portfolio, with an AI assistant that answers questions about my work, streamed from a FastAPI and Groq backend.",
+    image: '/images/portfolio.png',
+    demoUrl: 'https://www.justinaominisan.com.ng',
+    githubUrl: 'https://github.com/Justinacodes/portfolio-justina',
   },
    {
     id: 'emmaplus',
@@ -461,16 +487,17 @@ export const projects: Project[] = [
     demoUrl: 'https://highklazz.com.ng',
   },
  
-  {
-    id: 'movrev',
-    client: 'Mov-Rev',
-    tags: 'React, JavaScript, CSS',
+{
+    id: 'mellyguard',
+    client: 'MellyGuard',
+    tags: 'Next.js, React',
     period: 'Live',
-    title: 'Movie reviews app',
-    blurb: 'Browse reviews and ratings for the latest movies.',
-    image: '/images/movrev.png',
-    demoUrl: 'https://movie-rev-psi.vercel.app',
-    githubUrl: 'https://github.com/Justinacodes',
+    title: 'Product landing page',
+    blurb:
+      'The landing page for MellyGuard, a financial crime platform unifying KYC, fraud, AML and compliance. I also work on the platform itself, including AI Studio.',
+    image: '/images/mellyguard.png',
+    imagePosition: 'left',
+    demoUrl: 'https://mellyguard.ai',
   },
   {
     id: 'revocube',
