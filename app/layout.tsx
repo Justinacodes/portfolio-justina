@@ -32,9 +32,9 @@ const instrumentSerif = Instrument_Serif({
   variable: '--font-serif',
   display: 'swap',
 })
-const TITLE = "Justina Ominisan - Frontend Engineer / AI Engineer"
+const TITLE = "Justina Ominisan - Software Engineer, Frontend & AI"
 const DESCRIPTION =
-  "Frontend Engineer and AI Engineer building modern web applications, AI-powered products and data-driven interfaces with React, Next.js, TypeScript and AWS."
+  "Frontend-focused software engineer building polished interfaces, websites and online stores for businesses, and AI-powered products with React, Next.js, TypeScript and AWS."
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.justinaominisan.com.ng"),
@@ -44,8 +44,12 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
 
   keywords: [
+    "Software Engineer",
     "Frontend Engineer",
+    "Frontend Developer",
     "AI Engineer",
+    "Web Developer",
+    "Website for business",
     "React",
     "Next.js",
     "TypeScript",
@@ -112,7 +116,7 @@ const structuredData = {
   "@type": "Person",
   name: "Justina Ominisan",
   url: "https://www.justinaominisan.com.ng",
-  jobTitle: "Frontend Engineer / AI Engineer",
+  jobTitle: "Software Engineer",
   description: DESCRIPTION,
   knowsAbout: [
     "Frontend Engineering",
@@ -188,7 +192,7 @@ export default function RootLayout({
           }}
         />
         <noscript>
-          <style>{`.splash{display:none}`}</style>
+          <style>{`.splash{display:none}.stream-char{opacity:1}`}</style>
         </noscript>
         {children}
         <Analytics />

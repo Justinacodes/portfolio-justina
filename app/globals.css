@@ -160,6 +160,8 @@ body::after {
   width: 0.07em;
   height: 0.78em;
   margin-left: 0.06em;
+  /* Cancel its own width so the caret never changes where lines wrap */
+  margin-right: -0.13em;
   vertical-align: -0.04em;
   background: currentColor;
   opacity: 0;
@@ -168,6 +170,17 @@ body::after {
 .is-visible .stream-caret {
   animation: caret-blink 0.9s steps(1) 4 forwards;
   animation-delay: 150ms;
+}
+
+/* The hero has no Reveal: it streams once the loading screen has gone. */
+.splash-done .hero-stream .stream-char {
+  animation: stream-in 0.01s linear forwards;
+  animation-delay: calc(450ms + var(--i) * 55ms);
+}
+
+.splash-done .hero-stream .stream-caret {
+  animation: caret-blink 0.9s steps(1) 5 forwards;
+  animation-delay: 300ms;
 }
 
 @keyframes stream-in {

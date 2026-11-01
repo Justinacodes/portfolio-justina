@@ -1,5 +1,6 @@
 // components/Hero.tsx
 import React from 'react';
+import StreamText from './StreamText';
 
 /**
  * Portrait hero. The source photo is 719x1080 (2:3), so on a wide viewport
@@ -88,25 +89,43 @@ const Hero: React.FC = () => {
       />
 
       <div className="shell relative w-full pb-14 pt-32 sm:pb-24">
-        <h1 className="max-w-[16ch] font-display text-display-lg font-bold sm:text-display-xl lg:max-w-[13ch]">
-          <span className="fade-up block text-white" style={{ animationDelay: '100ms' }}>
-            Justina Ominisan.
-          </span>
-          <span
-            className="fade-up block text-white/45"
-            style={{ animationDelay: '220ms' }}
-          >
-            Frontend &amp; AI engineer.
-          </span>
+        {/* No job title up top: the headline says what she does, and the
+            paragraph speaks to both recruiters and business owners. */}
+        <h1
+          className="fade-up max-w-[15ch] font-display text-display-lg font-bold text-white sm:text-[clamp(2.75rem,5.4vw,4.75rem)] sm:leading-[1]"
+          style={{ animationDelay: '100ms' }}
+        >
+          I build software that solves{' '}
+          {/* Streams in once the loading screen lifts (.hero-stream in globals.css). */}
+          <em className="hero-stream font-serif text-[1.08em] font-normal italic tracking-normal text-[#E8964A]">
+            <StreamText text="real problems." />
+          </em>
         </h1>
 
         <p
-          className="fade-up mt-7 max-w-measure text-base leading-relaxed text-white/70 sm:text-lg"
-          style={{ animationDelay: '360ms' }}
+          className="fade-up mt-7 max-w-[38rem] text-base leading-relaxed text-white/70 sm:text-lg"
+          style={{ animationDelay: '300ms' }}
         >
-          I build web applications and AI-powered products — dashboards, RAG systems
-          and real-time LLM interfaces. AWS Certified.
+          I&apos;m <span className="font-medium text-white">Justina Ominisan</span>, a
+          software engineer. I build polished interfaces, websites, online stores and
+          business applications, as well as AI-powered products that people can
+          actually use.
         </p>
+
+        {/* For recruiters skimming for the stack */}
+        <ul
+          className="fade-up mt-6 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-white/55"
+          style={{ animationDelay: '380ms' }}
+        >
+          {['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'AI products', 'AWS certified'].map(
+            (item) => (
+              <li key={item} className="flex items-center gap-2">
+                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-[#E8964A]" />
+                {item}
+              </li>
+            )
+          )}
+        </ul>
 
         <div
           className="fade-up mt-9 flex flex-wrap items-center gap-3"
@@ -125,10 +144,16 @@ const Hero: React.FC = () => {
             </span>
           </a>
           <a
-            href="#about"
-            className="inline-flex items-center rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
+            href="#contact"
+            className="group inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
           >
-            About me
+            Need a website?
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 ease-editorial group-hover:translate-x-0.5"
+            >
+              &#8594;
+            </span>
           </a>
         </div>
       </div>

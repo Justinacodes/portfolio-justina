@@ -28,7 +28,7 @@ const About: React.FC = () => {
           <div className="lg:col-span-7">
             <Reveal>
               <h2 className="max-w-[22ch] font-display text-display-lg font-bold text-fg">
-                I&apos;m Justina, a frontend engineer working on{' '}
+                I&apos;m Justina, frontend at heart, building{' '}
                 <em className="font-serif text-[1.12em] font-normal italic tracking-normal text-accent">
                   <StreamText text="AI products." />
                 </em>
