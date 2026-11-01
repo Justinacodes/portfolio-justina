@@ -425,6 +425,17 @@ export const projects: Project[] = [
     demoUrl: 'https://stuvo.io/',
     githubUrl: 'https://github.com/Justinacodes',
   },
+   {
+    id: 'emmaplus',
+    client: 'Emmaplus',
+    tags: 'WordPress, WooCommerce, Paystack',
+    period: 'Live',
+    title: 'Online storefront',
+    blurb: 'Shopping cart with filtering, wishlist and checkout on WooCommerce.',
+    image: '/images/emmaplus.png',
+    demoUrl: 'https://emmaplus.com.ng',
+    githubUrl: 'https://github.com/Justinacodes',
+  },
     {
     id: 'jobtracker',
     client: 'AI Job Tracker',
@@ -449,17 +460,7 @@ export const projects: Project[] = [
     image: '/images/highklazz.png',
     demoUrl: 'https://highklazz.com.ng',
   },
-  {
-    id: 'emmaplus',
-    client: 'Emmaplus',
-    tags: 'WordPress, WooCommerce, Paystack',
-    period: 'Live',
-    title: 'Online storefront',
-    blurb: 'Shopping cart with filtering, wishlist and checkout on WooCommerce.',
-    image: '/images/emmaplus.png',
-    demoUrl: 'https://emmaplus.com.ng',
-    githubUrl: 'https://github.com/Justinacodes',
-  },
+ 
   {
     id: 'movrev',
     client: 'Mov-Rev',
